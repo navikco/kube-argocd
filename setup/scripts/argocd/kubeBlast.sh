@@ -21,12 +21,6 @@ pkill -f 8000 | true
 
 pkill -f 5000 | true
 
-#echo "CREATING :::>>> Cluster ::: [[[ kube-land ]]]..."
-
-#kind create cluster --name kube-land --config ../cluster/kube-land-config.yml
-
-#echo "CREATED :::>>> Cluster ::: [[[ kube-land ]]]..."
-
 ./destroyKubeCluster.sh
 
 ./createKubeCluster.sh
@@ -55,8 +49,6 @@ docker push localhost:5000/redis:5.0.3
 
 echo -e "FINISHED Pushing :::>>> ARGO-CD images from docker to kind registry\n"
 
-#cd argocd/${ENVIRONMENT}/
-
 echo "FORWARDING :::>>> PORTS in ::: [[[ ${ENVIRONMENT} ]]]..."
 
 kubectl port-forward service/ingress-nginx 8081:80 --namespace=ingress-nginx &
@@ -64,14 +56,6 @@ kubectl port-forward service/ingress-nginx 8081:80 --namespace=ingress-nginx &
 echo "FORWARDED :::>>> PORTS in ::: [[[ ${ENVIRONMENT} ]]]..."
 
 ./argocdBlast.sh ${ENVIRONMENT}
-
-#echo "GENERATING :::>>> Access Key For ::: [[[ K8Dash ]]]..."
-#
-#cd ../../
-#
-#./kube-land-ui-access-key.sh
-#
-#echo "GENERATED :::>>> Access Key For ::: [[[ K8Dash ]]]..."
 
 sleep 10
 
