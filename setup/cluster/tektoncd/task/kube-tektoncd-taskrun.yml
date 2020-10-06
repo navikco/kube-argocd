@@ -14,9 +14,9 @@ spec:
           name: kube-tektoncd-github
     params:
       - name: pathToDockerFile
-        value: /workspace/kube-argocd/setup/docker/build/Dockerfile
+        value: ./setup/docker/build/Dockerfile
       - name: pathToContext
-        value: /workspace/git-source
+        value: git://github.com/navikco/kube-argocd.git#refs/heads/master
   outputs:
     resources:
       - name: builtImage
