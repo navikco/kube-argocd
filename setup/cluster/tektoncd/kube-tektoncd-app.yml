@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-tekton-cd
+spec:
+  destination:
+    namespace: kube-tekton-cd
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: setup/cluster/tektoncd/
+    repoURL: 'ssh://git@github.com:navikco/kube-argocd.git'
+    targetRevision: master
+    directory:
+      recurse: true
+  project: kube
+  syncPolicy:
+    automated:
+      automated:
+        prune: false
+        selfHeal: false
+      prune: true
+      selfHeal: true
+project: kube
+source:
+  repoURL: 'ssh://git@github.com:navikco/kube-argocd.git'
+  path: setup/cluster/tektoncd/
+  targetRevision: master
+  directory:
+    recurse: true
+    jsonnet: {}
+destination:
+  server: 'https://kubernetes.default.svc'
+  namespace: kube-tekton-cd
+syncPolicy:
+  automated:
+    prune: true
+    selfHeal: true

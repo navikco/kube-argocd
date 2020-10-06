@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: kube-tektoncd-dockerhub
+  namespace: kube-tekton-cd
+spec:
+  type: image
+  params:
+    - name: url
+      value: "https://hub.docker.com/repository/docker/navikco/kube"
