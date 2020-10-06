@@ -37,9 +37,9 @@ fi
 
 KUBE_SCRIPTS_HOME=$PWD
 echo "KUBE_SCRIPTS_HOME ::: [[[ ${KUBE_SCRIPTS_HOME} ]]]..."
-KUBE_HOME=../../
+KUBE_HOME=../../../
 echo "KUBE_HOME ::: [[[ ${KUBE_HOME} ]]]..."
-KUBE_APPS_HOME=${PWD}/../../../apps/
+KUBE_APPS_HOME=${KUBE_HOME}/apps/
 echo "KUBE_APPS_HOME ::: [[[ ${KUBE_APPS_HOME} ]]]..."
 KUBE_DOCKER_HOST_HOME=/opt/mw
 
@@ -58,6 +58,8 @@ echo "Build Container Image ::: [[[ ${MICROSERVICE} ]]] in [[[ ${ENVIRONMENT} ]]
 cd ${KUBE_HOME}/setup/docker/
 
 ./buildKubeContainerImage.sh ${MICROSERVICE}
+
+cd ${KUBE_SCRIPTS_HOME}/
 
 echo "Built Container Image ::: [[[ ${MICROSERVICE} ]]] in [[[ ${ENVIRONMENT} ]]]..."
 

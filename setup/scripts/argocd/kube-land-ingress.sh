@@ -13,7 +13,7 @@ else
     exit 1
 fi
 
-cd ../../cluster/ingress/
+cd ../../cluster/argocd/ingress/
 
 echo "CREATING :::>>> K8S Ingress Controller for EWS ::: [[[ ${ENVIRONMENT} ]]]..."
 
