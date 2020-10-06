@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: kube-ingress-config
+  namespace: ingress-nginx
+data:
+  enable-underscores-in-headers: "true"
+  proxy-connect-timeout: "10"
+  proxy-read-timeout: "20"
+  proxy-send-timeout: "10"
+  proxy-next-upstream-tries: "1"
+#  proxy-next-upstream: "off"
