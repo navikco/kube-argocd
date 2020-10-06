@@ -29,13 +29,13 @@ sleep 30
 #START UP#
 ##########
 
-./setupKubeLandDeployment.sh ${BREED} admin nobuild
+./buildKubeApps.sh ${BREED} admin nobuild
 
-./setupKubeLandDeployment.sh ${BREED} accounts nobuild
+./buildKubeApps.sh ${BREED} accounts nobuild
 
-./setupKubeLandDeployment.sh ${BREED} customers nobuild
+./buildKubeApps.sh ${BREED} customers nobuild
 
-./setupKubeLandDeployment.sh ${BREED} users nobuild
+./buildKubeApps.sh ${BREED} users nobuild
 
 sleep 10
 

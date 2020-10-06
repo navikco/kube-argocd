@@ -9,7 +9,7 @@ then
     echo "ENVIRONMENT :::>>> ${ENVIRONMENT}"
 
 else
-    echo "Usage: . ./kube-land-blast.sh <<ENVIRONMENT>>"
+    echo "Usage: . ./kubeBlast.sh <<ENVIRONMENT>>"
     exit 1
 fi
 
@@ -27,13 +27,13 @@ pkill -f 5000 | true
 
 #echo "CREATED :::>>> Cluster ::: [[[ kube-land ]]]..."
 
-./kube-land-destroy.sh
+./destroyKubeCluster.sh
 
-./kube-land-cluster.sh
+./createKubeCluster.sh
 
 kind get clusters
 
-./kube-land-ingress.sh ${ENVIRONMENT}
+./setupKubeIngress.sh ${ENVIRONMENT}
 
 echo -e "\nSTART Pulling And Tagging :::>>> ARGO-CD images"
 echo "!! Warning: Pulling images may take as long as 10 minutes to run the first time !!"
