@@ -22,7 +22,7 @@
 
 # Pull base image
 # ---------------
-FROM parrotstream/centos-openjdk:8
+FROM fabric8/java-alpine-openjdk8-jre
 
 # Maintainer
 # ----------
@@ -37,7 +37,7 @@ RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
 ADD ./ .
 
-RUN ls -lRt
+#RUN ls -lRt
 
 RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
