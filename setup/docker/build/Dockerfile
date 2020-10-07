@@ -49,7 +49,7 @@ RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
 #RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
 
-RUN ./apps/${kubeMicroservice}/gradle wrapper
+RUN apps/${kubeMicroservice}/gradle wrapper
 
 RUN ./apps/${kubeMicroservice}/gradlew clean build
 
