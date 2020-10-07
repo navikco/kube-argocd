@@ -42,6 +42,6 @@ spec:
         - --destination=$(outputs.resources.builtImage.url)
         - --context=$(inputs.params.pathToContext)
 #        - --context-sub-path=$(inputs.params.pathToDockerBuild)
-        - --build-arg=kubeMicroservice=${MICROSERVICE}
+        - --build-arg=kubeMicroservice=admin
         - --insecure
         - --skip-tls-verify
