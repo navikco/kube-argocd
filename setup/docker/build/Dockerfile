@@ -37,6 +37,8 @@ RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
 ADD ./ .
 
+RUN ls -lRt
+
 RUN ./bin/setupKUBE.sh ${kubeMicroservice}
 
 # KUBE Docker Container Run as kubeadmin

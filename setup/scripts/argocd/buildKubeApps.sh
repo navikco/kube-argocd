@@ -37,11 +37,10 @@ fi
 
 KUBE_SCRIPTS_HOME=$PWD
 echo "KUBE_SCRIPTS_HOME ::: [[[ ${KUBE_SCRIPTS_HOME} ]]]..."
-KUBE_HOME=../../../
+KUBE_HOME=${KUBE_SCRIPTS_HOME}/../../../
 echo "KUBE_HOME ::: [[[ ${KUBE_HOME} ]]]..."
 KUBE_APPS_HOME=${KUBE_HOME}/apps/
 echo "KUBE_APPS_HOME ::: [[[ ${KUBE_APPS_HOME} ]]]..."
-KUBE_DOCKER_HOST_HOME=/opt/mw
 
 if [[ "$BUILD" == "build"  ]]
 then
