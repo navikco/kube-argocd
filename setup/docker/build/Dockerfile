@@ -81,11 +81,11 @@ RUN rm -rf apps/
 
 RUN pwd && ls -lRt
 
-RUN ./setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
+RUN setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
 
 #WORKDIR /opt/mw/apps/kube/bin/
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["./setup/docker/build/bin/startKUBE.sh"]
+ENTRYPOINT ["setup/docker/build/bin/startKUBE.sh"]
