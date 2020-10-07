@@ -28,4 +28,4 @@ chown kubeadmin:kubeadmin -R /opt/mw/
 
 chmod 775 -R /opt/mw/
 
-ls -R /opt/mw/
+#ls -R /opt/mw/

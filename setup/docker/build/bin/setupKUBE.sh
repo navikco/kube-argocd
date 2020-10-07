@@ -17,8 +17,8 @@ fi
 # --------------------------------------------
 # https://localhost:20024/kube/customers/info/index.html
 
-echo "PWD ::: ${PWD}"
-ls -al ${PWD}
+#echo "PWD ::: ${PWD}"
+#ls -al ${PWD}
 
 ./setupKUBEUser.sh
 
@@ -28,5 +28,5 @@ chown kubeadmin:kubeadmin -R /opt/mw/apps/kube/
 
 chmod 775 -R /opt/mw/
 
-echo "ls -R /opt/ ---"
-ls -alR /opt/
+#echo "ls -R /opt/ ---"
+#ls -alR /opt/

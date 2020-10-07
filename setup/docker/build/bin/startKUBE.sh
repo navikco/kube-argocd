@@ -38,10 +38,10 @@ KUBE_HOME=/opt/mw/apps/kube/setup/docker/build/
 
 cd ${KUBE_HOME}
 
-echo "$MICROSERVICE :::>>> FileSystem Validation!!!"
-ls -R /opt/mw/
+#echo "$MICROSERVICE :::>>> FileSystem Validation!!!"
+#ls -R /opt/mw/
 
-ls -al /opt/mw/
+#ls -al /opt/mw/
 
 echo "STARTING :::>>> KUBE Microservice [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]] on [[[ " + ${INSTANCE} + " ]]]..."
 
