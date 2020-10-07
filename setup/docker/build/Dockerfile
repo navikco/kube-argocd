@@ -47,11 +47,29 @@ RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
 #RUN ls -al
 
-#RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
+# Setup Pod Timezone
+# ------------------
+echo "###Setup Pod Timezone###"
+RUN apk add tzdata
+RUN ls /usr/share/zoneinfo
+RUN cp /usr/share/zoneinfo/America/Chicago /etc/localtime
+RUN echo "America/Chicago" >  /etc/timezone
+RUN date
+RUN apk del tzdata
 
+# Setup Pod Timezone
+# ------------------
+echo "###Setup Pod Timezone###"
+RUN apk add gradle
+RUN echo "Gradle Version $(gradle --version)"
+RUN gradle --version
+
+#RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
 RUN apps/${kubeMicroservice}/gradle wrapper
 
 RUN ./apps/${kubeMicroservice}/gradlew clean build
+
+RUN apk del tzdata
 
 RUN ls -lRt
 
