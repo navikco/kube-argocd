@@ -63,17 +63,19 @@ RUN echo "Gradle Version $(gradle --version)"
 RUN gradle --version
 
 #RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
+WORKDIR /opt/mw/apps/kube/apps/${kubeMicroservice}/
+
 RUN gradle wrapper
 
-RUN ./apps/${kubeMicroservice}/gradlew clean build
+RUN ./gradlew clean build
 
 RUN apk del tzdata
 
 RUN ls -lRt
 
-RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
+RUN mv build/libs/${kubeMicroservice}*.jar setup/docker/build/
 
-#WORKDIR /opt/mw/apps/kube/
+WORKDIR /opt/mw/apps/kube/
 
 RUN ./setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
