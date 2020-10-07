@@ -41,23 +41,23 @@ RUN ls -lRt
 
 RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
-RUN cd apps/${kubeMicroservice}/
+#RUN cd apps/${kubeMicroservice}/
 
-RUN pwd
+#RUN pwd
 
-RUN ls -al
+#RUN ls -al
 
 #RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
 
-RUN gradle wrapper
+RUN ./apps/${kubeMicroservice}/gradle wrapper
 
-RUN ./gradlew clean build
+RUN ./apps/${kubeMicroservice}/gradlew clean build
 
 RUN ls -lRt
 
-RUN mv build/libs/${kubeMicroservice}*.jar /opt/mw/apps/kube/setup/docker/build/
+RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
 
-WORKDIR /opt/mw/apps/kube/
+#WORKDIR /opt/mw/apps/kube/
 
 RUN ./setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
@@ -66,4 +66,4 @@ USER kubeadmin
 
 #WORKDIR /opt/mw/apps/kube/bin/
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["/opt/mw/apps/kube/setup/docker/build/bin/startKUBE.sh"]
+ENTRYPOINT ["./setup/docker/build/bin/startKUBE.sh"]
