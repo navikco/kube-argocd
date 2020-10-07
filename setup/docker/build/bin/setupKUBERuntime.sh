@@ -22,7 +22,7 @@ echo "$MICROSERVICE :::>>> Evaluated kubeBase <<<${kubeBase}>>>"
 
 mkdir -p /opt/mw/mount/logs/${kubeBase}/${MICROSERVICE}/
 
-mv ${MICROSERVICE}*.jar /opt/mw/apps/kube/${MICROSERVICE}/
+mv ../${MICROSERVICE}*.jar /opt/mw/apps/kube/${MICROSERVICE}/
 
 chown kubeadmin:kubeadmin -R /opt/mw/
 

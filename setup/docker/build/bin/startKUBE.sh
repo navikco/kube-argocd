@@ -34,7 +34,7 @@ fi
 
 INSTANCE=$HOSTNAME
 
-KUBE_HOME=/opt/mw/apps/kube/
+KUBE_HOME=/opt/mw/apps/kube/setup/docker/build/
 
 cd ${KUBE_HOME}
 
@@ -45,7 +45,7 @@ ls -al /opt/mw/
 
 echo "STARTING :::>>> KUBE Microservice [[[ " + ${MICROSERVICE} + " ]]] in [[[ " + ${ENVIRONMENT} + " ]]] on [[[ " + ${INSTANCE} + " ]]]..."
 
-java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}/${MICROSERVICE}-*.jar
+java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
 
 sleep 15
 

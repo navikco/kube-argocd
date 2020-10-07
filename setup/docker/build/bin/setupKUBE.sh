@@ -20,11 +20,11 @@ fi
 echo "PWD ::: ${PWD}"
 ls -al ${PWD}
 
-./bin/setupKUBEUser.sh
+./setupKUBEUser.sh
 
 chown kubeadmin:kubeadmin -R /opt/mw/apps/kube/
 
-./bin/setupKUBERuntime.sh ${MICROSERVICE}
+./setupKUBERuntime.sh ${MICROSERVICE}
 
 chmod 775 -R /opt/mw/
 
