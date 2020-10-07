@@ -7,5 +7,5 @@ spec:
   type: image
   params:
     - name: url
-      value: "navikco/kube:admin-0.0.0_01"
+      value: "navikco/kube:admin-0.0.0_02"
 #      value: "https://hub.docker.com/repository/docker/navikco/kube:admin-0.0.0_01"
