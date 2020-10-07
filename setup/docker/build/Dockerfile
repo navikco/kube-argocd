@@ -59,7 +59,6 @@ RUN apk del tzdata
 
 # Setup Pod Timezone
 # ------------------
-echo "###Setup Pod Timezone###"
 RUN apk add gradle
 RUN echo "Gradle Version $(gradle --version)"
 RUN gradle --version
