@@ -70,6 +70,7 @@ RUN gradle wrapper
 RUN ./gradlew clean build
 
 RUN apk del gradle
+RUN apk del openjdk8
 
 RUN ls -al build/libs/
 
@@ -77,13 +78,13 @@ WORKDIR /opt/mw/apps/kube/
 
 RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
 
-RUN rm -rf apps/
+RUN rm -rf apps/ && rm -rf setup/cluster/ && rm -rf setup/scripts/ && rm -rf .git/ && rm -rf gradle* && rm -rf LICENSE && rm -rf README.md
 
-RUN pwd && ls -al setup/docker/build/bin/setupKUBE.sh
+#RUN pwd && ls -al setup/docker/build/bin/setupKUBE.sh
 
 WORKDIR /opt/mw/apps/kube/setup/docker/build/bin/
 
-RUN pwd && ls -al setupKUBE.sh
+#RUN pwd && ls -al setupKUBE.sh
 
 RUN ./setupKUBE.sh ${kubeMicroservice}
 
