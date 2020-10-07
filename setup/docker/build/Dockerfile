@@ -39,11 +39,23 @@ ADD ./ .
 
 RUN ls -lRt
 
-RUN ./bin/setupKUBE.sh ${kubeMicroservice}
+RUN echo "###BUILD :::>>> ${kubeMicroservice}"
+
+RUN cd apps/${kubeMicroservice}/
+
+RUN ./gradlew clean build
+
+RUN ls -lRt
+
+RUN mv build/libs/${kubeMicroservice}*.jar /opt/mw/apps/kube/setup/docker/build/
+
+WORKDIR /opt/mw/apps/kube/
+
+RUN ./setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
 
-WORKDIR /opt/mw/apps/kube/bin/
+#WORKDIR /opt/mw/apps/kube/bin/
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["/opt/mw/apps/kube/bin/startKUBE.sh"]
+ENTRYPOINT ["/opt/mw/apps/kube/setup/docker/build/bin/startKUBE.sh"]
