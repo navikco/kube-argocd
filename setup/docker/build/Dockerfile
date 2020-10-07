@@ -49,7 +49,6 @@ RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
 # Setup Pod Timezone
 # ------------------
-echo "###Setup Pod Timezone###"
 RUN apk add tzdata
 RUN ls /usr/share/zoneinfo
 RUN cp /usr/share/zoneinfo/America/Chicago /etc/localtime
