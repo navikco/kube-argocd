@@ -49,18 +49,11 @@ RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
 # Setup Pod Timezone
 # ------------------
-RUN apk add tzdata
-RUN ls /usr/share/zoneinfo
-RUN cp /usr/share/zoneinfo/America/Chicago /etc/localtime
-RUN echo "America/Chicago" >  /etc/timezone
-RUN date
-RUN apk del tzdata
+RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/Chicago /etc/localtime && echo "America/Chicago" >  /etc/timezone && RUN date && RUN apk del tzdata
 
 # Setup Pod Timezone
 # ------------------
-RUN apk add gradle
-RUN echo "Gradle Version $(gradle --version)"
-RUN gradle --version
+RUN apk add gradle && RUN echo "Gradle Version $(gradle --version)" && RUN gradle --version
 
 #RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
 WORKDIR /opt/mw/apps/kube/apps/${kubeMicroservice}/
@@ -69,10 +62,9 @@ RUN gradle wrapper
 
 RUN ./gradlew clean build
 
-RUN apk del gradle
-RUN apk del openjdk8
+RUN apk del gradle && RUN apk del openjdk8
 
-RUN ls -al build/libs/
+#RUN ls -al build/libs/
 
 WORKDIR /opt/mw/apps/kube/
 
@@ -81,6 +73,8 @@ RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker
 RUN rm -rf apps/ && rm -rf setup/cluster/ && rm -rf setup/scripts/ && rm -rf .git/ && rm -rf gradle* && rm -rf LICENSE && rm -rf README.md
 
 #RUN pwd && ls -al setup/docker/build/bin/setupKUBE.sh
+
+RUN ls -lRt
 
 WORKDIR /opt/mw/apps/kube/setup/docker/build/bin/
 
