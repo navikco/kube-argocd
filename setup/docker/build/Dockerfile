@@ -69,13 +69,15 @@ RUN gradle wrapper
 
 RUN ./gradlew clean build
 
-RUN apk del tzdata
+RUN apk del gradle
 
-RUN ls -lRt
-
-RUN mv build/libs/${kubeMicroservice}*.jar setup/docker/build/
+RUN ls -al build/libs/
 
 WORKDIR /opt/mw/apps/kube/
+
+RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
+
+RUN rm -rf apps/
 
 RUN ./setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
