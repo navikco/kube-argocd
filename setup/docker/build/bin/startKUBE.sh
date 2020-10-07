@@ -38,6 +38,10 @@ KUBE_HOME=/opt/mw/apps/kube/setup/docker/build/
 
 cd ${KUBE_HOME}
 
+pwd
+
+ls -al
+
 #echo "$MICROSERVICE :::>>> FileSystem Validation!!!"
 #ls -R /opt/mw/
 
