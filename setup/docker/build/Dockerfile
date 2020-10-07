@@ -79,7 +79,7 @@ RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker
 
 RUN rm -rf apps/
 
-RUN pwd && ls -lRt
+RUN pwd && ls -al setup/docker/build/bin/setupKUBE.sh
 
 RUN setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
