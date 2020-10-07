@@ -63,7 +63,7 @@ RUN echo "Gradle Version $(gradle --version)"
 RUN gradle --version
 
 #RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
-RUN apps/${kubeMicroservice}/gradle wrapper
+RUN gradle wrapper
 
 RUN ./apps/${kubeMicroservice}/gradlew clean build
 
