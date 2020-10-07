@@ -43,7 +43,7 @@ RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
 RUN cd apps/${kubeMicroservice}/
 
-RUN PWD
+RUN pwd
 
 RUN ls -al
 
