@@ -79,6 +79,8 @@ RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker
 
 RUN rm -rf apps/
 
+RUN pwd && ls -lRt
+
 RUN ./setup/docker/build/bin/setupKUBE.sh ${kubeMicroservice}
 
 # KUBE Docker Container Run as kubeadmin
