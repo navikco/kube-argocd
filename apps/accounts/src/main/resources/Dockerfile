@@ -62,4 +62,4 @@ USER kubeadmin
 WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["pwd", "&&", "ls -lRt", "&&", "java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false", "-jar", "./accounts-*.jar" ]
+ENTRYPOINT ["java", "-jar", "./accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
