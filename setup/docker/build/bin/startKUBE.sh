@@ -40,7 +40,7 @@ INSTANCE=$HOSTNAME
 
 pwd
 
-ls -al
+ls -lRt ../
 
 #echo "$MICROSERVICE :::>>> FileSystem Validation!!!"
 #ls -R /opt/mw/
