@@ -23,7 +23,7 @@ kubectl create -f ../../cluster/argocd/kube-cd.yml
 
 echo "INSTALLED :::>>> ArgoCD..."
 
-sleep 30
+sleep 130
 
 ##########
 #START UP#
@@ -47,5 +47,8 @@ argocd proj allow-cluster-resource kube-tektoncd "*" "*"
 argocd app create kube-tektoncd-${ENVIRONMENT} --repo git@github.com:navikco/kube-argocd.git --revision "master" --path setup/cluster/tektoncd/ --project kube-tektoncd --dest-server "https://kubernetes.default.svc" --dest-namespace kube-${ENVIRONMENT}  --sync-policy automated --directory-recurse --self-heal --auto-prune
 
 sleep 30
+
+kubectl port-forward service/tekton-dashboard 5005:9097 --namespace=kube-tekton-cd &
+sleep 10
 
 exit 0
