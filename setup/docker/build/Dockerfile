@@ -73,7 +73,7 @@ RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/C
 #WORKDIR /opt/mw/apps/kube/
 
 #RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
-COPY --from=builder /workspace/apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar build/
+COPY --from=builder /workspace/apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar .
 
 #RUN rm -rf apps/ && rm -rf setup/cluster/ && rm -rf setup/scripts/ && rm -rf .git/ && rm -rf gradle* && rm -rf LICENSE && rm -rf README.md
 
@@ -81,7 +81,7 @@ COPY --from=builder /workspace/apps/${kubeMicroservice}/build/libs/${kubeMicrose
 
 RUN ls -lRt
 
-WORKDIR build/bin/
+WORKDIR bin/
 
 #RUN pwd && ls -al setupKUBE.sh
 
