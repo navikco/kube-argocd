@@ -24,7 +24,7 @@
 FROM gradle:jdk8 AS builder
 WORKDIR /workspace
 ADD ./ .
-RUN cd apps/accounts/ && gradle wrapper && ./gradlew clean build && ls -ltr build/libs/
+RUN cd apps/accounts/ && gradle clean build && ls -ltr build/libs/
 
 
 # Pull base image
@@ -55,10 +55,10 @@ RUN ls -lRt
 
 #WORKDIR bin/
 
-RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/
+RUN adduser -g kube -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kube -R /opt/mw/apps/kube/ && chmod 775 -R /opt/mw/apps/kube/
 
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
 
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false", "-jar", "accounts-*.jar" ]
+ENTRYPOINT ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false", "-jar", "accounts*.jar" ]
