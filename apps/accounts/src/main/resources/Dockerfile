@@ -53,12 +53,13 @@ COPY --from=builder /workspace/apps/accounts/src/main/resources/logback-spring.x
 
 RUN ls -lRt
 
-#WORKDIR bin/
 
 RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
 
 # KUBE Docker Container Run as kubeadmin
-#USER kubeadmin
+USER kubeadmin
+
+WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false", "-jar", "/opt/mw/apps/kube/accounts*.jar" ]
+ENTRYPOINT ["pwd", "&&", "ls -lRt", "&&", "java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false", "-jar", "./accounts-*.jar" ]
