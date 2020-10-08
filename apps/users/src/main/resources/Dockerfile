@@ -14,17 +14,17 @@
 #
 # Run:
 #      $ cd kube-ingress/setup/scripts/
-#	   $ ./buildKubeContainerImage.sh accounts
+#	   $ ./buildKubeContainerImage.sh users
 #
 # Access:
 #      # Access your Microservice running as DOCKER Container at
-#           https://localhost:8080/kube/customers/info/index.html
+#           https://localhost:8080/kube/users/info/index.html
 
 
 FROM gradle:jdk8 AS builder
 WORKDIR /workspace
 ADD ./ .
-RUN cd apps/accounts/ && gradle clean build && ls -ltr build/libs/
+RUN cd apps/users/ && gradle clean build && ls -ltr build/libs/
 
 
 # Pull base image
@@ -42,25 +42,25 @@ RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
 #ADD setup/docker/build/bin/ .
 
-RUN echo "###BUILD :::>>> accounts"
+RUN echo "###BUILD :::>>> users"
 
 # Setup Pod Timezone
 # ------------------
 RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/Chicago /etc/localtime && echo "America/Chicago" >  /etc/timezone && date && apk del tzdata
 
-COPY --from=builder /workspace/apps/accounts/build/libs/accounts*.jar .
-COPY --from=builder /workspace/apps/accounts/src/main/resources/logback-spring.xml .
-COPY --from=builder /workspace/apps/accounts/src/main/resources/startKUBE.sh .
+COPY --from=builder /workspace/apps/users/build/libs/users*.jar .
+COPY --from=builder /workspace/apps/users/src/main/resources/logback-spring.xml .
+COPY --from=builder /workspace/apps/users/src/main/resources/startKUBE.sh .
 
 #RUN pwd && ls -lRt
 
-RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
+RUN adduser -g kubeusers -s /bin/sh kubeusers -D && echo 'kubeusers:p@ss10n' | chpasswd && chown kubeusers:kubeusers -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
 
-# KUBE Docker Container Run as kubeadmin
-USER kubeadmin
+# KUBE Docker Container Run as kubeusers
+USER kubeusers
 
 #WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
-#ENTRYPOINT ["java", "-jar", "accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
+#ENTRYPOINT ["java", "-jar", "users-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
 ENTRYPOINT ["./startKUBE.sh"]

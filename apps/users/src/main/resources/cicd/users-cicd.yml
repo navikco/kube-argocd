@@ -1,0 +1,90 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: kube-users-github
+  namespace: kube-tekton-cd
+spec:
+  type: git
+  params:
+    - name: url
+      value: https://github.com/navikco/kube-argocd.git
+    - name: revision
+      value: master
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: kube-users-dockerhub
+  namespace: kube-tekton-cd
+spec:
+  type: image
+  params:
+    - name: url
+      value: "navikco/kube:users-0.0.0_01"
+---
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: users-publish-task
+  namespace: kube-tekton-cd
+spec:
+  inputs:
+    resources:
+      - name: git-source
+        type: git
+    params:
+      - name: pathToDockerFile
+        type: string
+        description: The path to the dockerfile to build
+        default: /workspace/Dockerfile
+      - name: pathToContext
+        type: string
+        description:
+          The build context used by Kaniko
+          (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
+        default: /workspace
+  outputs:
+    resources:
+      - name: usersImage
+        type: image
+  steps:
+    - name: build-and-push
+      image: gcr.io/kaniko-project/executor:v0.15.0
+      # specifying DOCKER_CONFIG is required to allow kaniko to detect docker credential
+      env:
+        - name: "DOCKER_CONFIG"
+          value: "/tekton/home/.docker/"
+      command:
+        - /kaniko/executor
+      args:
+        - --dockerfile=$(inputs.params.pathToDockerFile)
+        - --destination=$(outputs.resources.usersImage.url)
+        - --context=$(inputs.params.pathToContext)
+        - --build-arg=kubeMicroservice=users
+        - --insecure
+        - --skip-tls-verify
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: users-publish
+  namespace: kube-tekton-cd
+spec:
+  serviceAccountName: navikco-sa
+  taskRef:
+    name: users-publish-task
+  inputs:
+    resources:
+      - name: git-source
+        resourceRef:
+          name: kube-users-github
+    params:
+      - name: pathToDockerFile
+        value: ./apps/users/src/main/resources/Dockerfile
+      - name: pathToContext
+        value: git://github.com/navikco/kube-argocd.git#refs/heads/master
+  outputs:
+    resources:
+      - name: usersImage
+        resourceRef:
+          name: kube-users-dockerhub
