@@ -20,7 +20,7 @@ spec:
   type: image
   params:
     - name: url
-      value: "navikco/kube/customers:latest"
+      value: "navikco/kube/customers-latest"
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: Task
