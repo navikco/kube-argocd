@@ -20,6 +20,14 @@
 #      # Access your Microservice running as DOCKER Container at
 #           https://localhost:8080/kube/customers/info/index.html
 
+
+FROM gradle:jre8 AS builder
+ARG kubeMicroservice
+WORKDIR /workspace
+ADD apps/${kubeMicroservice}/ .
+RUN gradle wrapper && ./gradlew clean build && ls -ltr build/libs/
+
+
 # Pull base image
 # ---------------
 FROM fabric8/java-alpine-openjdk8-jre
@@ -35,7 +43,7 @@ USER root
 VOLUME ["/opt/mw/mount"]
 RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
-ADD ./ .
+ADD setup/docker/build/ .
 
 #RUN ls -lRt
 
@@ -53,26 +61,27 @@ RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/C
 
 # Setup Pod Timezone
 # ------------------
-RUN apk add gradle && echo "Gradle Version $(gradle --version)" && gradle --version
+#RUN apk add gradle && echo "Gradle Version $(gradle --version)" && gradle --version
 
 #RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
-WORKDIR /opt/mw/apps/kube/apps/${kubeMicroservice}/
+#WORKDIR /opt/mw/apps/kube/apps/${kubeMicroservice}/
 
-RUN gradle wrapper && ./gradlew clean build && apk del gradle && apk del openjdk8
+#RUN gradle wrapper && ./gradlew clean build && apk del gradle && apk del openjdk8
 
 #RUN ls -al build/libs/
 
-WORKDIR /opt/mw/apps/kube/
+#WORKDIR /opt/mw/apps/kube/
 
-RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
+#RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
+COPY --from=builder /workspace/build/libs/${kubeMicroservice}*.jar build/
 
-RUN rm -rf apps/ && rm -rf setup/cluster/ && rm -rf setup/scripts/ && rm -rf .git/ && rm -rf gradle* && rm -rf LICENSE && rm -rf README.md
+#RUN rm -rf apps/ && rm -rf setup/cluster/ && rm -rf setup/scripts/ && rm -rf .git/ && rm -rf gradle* && rm -rf LICENSE && rm -rf README.md
 
 #RUN pwd && ls -al setup/docker/build/bin/setupKUBE.sh
 
 RUN ls -lRt
 
-WORKDIR /opt/mw/apps/kube/setup/docker/build/bin/
+WORKDIR build/bin/
 
 #RUN pwd && ls -al setupKUBE.sh
 
