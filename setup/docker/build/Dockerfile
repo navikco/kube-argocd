@@ -24,8 +24,8 @@
 FROM gradle:jre8 AS builder
 ARG kubeMicroservice
 WORKDIR /workspace
-ADD apps/${kubeMicroservice}/ .
-RUN gradle wrapper && ./gradlew clean build && ls -ltr build/libs/
+ADD ./ .
+RUN cd apps/${kubeMicroservice}/ && gradle wrapper && ./gradlew clean build && ls -ltr build/libs/
 
 
 # Pull base image
