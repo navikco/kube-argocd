@@ -29,16 +29,6 @@ sleep 30
 #START UP#
 ##########
 
-./buildKubeApps.sh ${ENVIRONMENT} admin nobuild
-
-./buildKubeApps.sh ${ENVIRONMENT} accounts nobuild
-
-./buildKubeApps.sh ${ENVIRONMENT} customers nobuild
-
-./buildKubeApps.sh ${ENVIRONMENT} users nobuild
-
-sleep 10
-
 kubectl port-forward service/argocd-server 5000:80 --namespace=kube-cd &
 sleep 10
 

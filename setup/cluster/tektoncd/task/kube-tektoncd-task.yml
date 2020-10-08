@@ -19,10 +19,14 @@ spec:
           The build context used by Kaniko
           (https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts)
         default: /workspace
-      - name: MICROSERVICE
+      - name: kubeMicroservice
         type: string
         description:
           Microservice Name to be Built and Published
+      - name: kubeMicroserviceVersion
+        type: string
+        description:
+          Microservice Version to be Built and Published
   outputs:
     resources:
       - name: builtImage
@@ -38,10 +42,9 @@ spec:
         - /kaniko/executor
       args:
         - --dockerfile=$(inputs.params.pathToDockerFile)
-#        - --destination=navikco/kube:admin-0.0.0_01
         - --destination=$(outputs.resources.builtImage.url)
         - --context=$(inputs.params.pathToContext)
-#        - --context-sub-path=$(inputs.params.pathToDockerBuild)
-        - --build-arg=kubeMicroservice=admin
+        - --build-arg=kubeMicroservice=$(inputs.params.kubeMicroservice)
+        - --build-arg=kubeMicroserviceVersion=$(inputs.params.kubeMicroserviceVersion)
         - --insecure
         - --skip-tls-verify

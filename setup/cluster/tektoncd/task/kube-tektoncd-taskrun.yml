@@ -17,10 +17,10 @@ spec:
         value: ./setup/docker/build/Dockerfile
       - name: pathToContext
         value: git://github.com/navikco/kube-argocd.git#refs/heads/master
-#      - name: pathToDockerBuild
-#        value: setup/docker/build/
-      - name: MICROSERVICE
+      - name: kubeMicroservice
         value: admin
+      - name: kubeMicroserviceVersion
+        value: 0.0.0_04
   outputs:
     resources:
       - name: builtImage

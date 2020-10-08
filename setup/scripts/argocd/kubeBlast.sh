@@ -51,7 +51,8 @@ echo -e "FINISHED Pushing :::>>> ARGO-CD images from docker to kind registry\n"
 
 echo "FORWARDING :::>>> PORTS in ::: [[[ ${ENVIRONMENT} ]]]..."
 
-kubectl port-forward service/ingress-nginx 8081:80 --namespace=ingress-nginx &
+kubectl port-forward service/ingress-nginx 8080:80 --namespace=ingress-nginx &
+#kubectl port-forward service/ingress-nginx 8081:80 --namespace=ingress-nginx &
 kubectl port-forward service/tekton-dashboard 5005:9097 --namespace=kube-tekton-cd &
 
 
@@ -61,8 +62,7 @@ echo "FORWARDED :::>>> PORTS in ::: [[[ ${ENVIRONMENT} ]]]..."
 
 sleep 10
 
-kubectl port-forward service/admin 9000:8080 --namespace=kube-${ENVIRONMENT} &
-kubectl port-forward service/ingress-nginx 8080:80 --namespace=ingress-nginx &
-kubectl port-forward deployment/k8dash 8000:4654 --namespace=kube-system &
+#kubectl port-forward service/admin 9000:8080 --namespace=kube-${ENVIRONMENT} &
+#kubectl port-forward deployment/k8dash 8000:4654 --namespace=kube-system &
 
 exit 0

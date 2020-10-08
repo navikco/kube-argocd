@@ -45,51 +45,22 @@ RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
 ADD setup/docker/build/ .
 
-#RUN ls -lRt
-
 RUN echo "###BUILD :::>>> ${kubeMicroservice}"
-
-#RUN cd apps/${kubeMicroservice}/
-
-#RUN pwd
-
-#RUN ls -al
 
 # Setup Pod Timezone
 # ------------------
 RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/Chicago /etc/localtime && echo "America/Chicago" >  /etc/timezone && date && apk del tzdata
 
-# Setup Pod Timezone
-# ------------------
-#RUN apk add gradle && echo "Gradle Version $(gradle --version)" && gradle --version
-
-#RUN wget https://services.gradle.org/distributions/gradle-6.3-bin.zip -P gradle/wrapper/
-#WORKDIR /opt/mw/apps/kube/apps/${kubeMicroservice}/
-
-#RUN gradle wrapper && ./gradlew clean build && apk del gradle && apk del openjdk8
-
-#RUN ls -al build/libs/
-
-#WORKDIR /opt/mw/apps/kube/
-
-#RUN mv apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar setup/docker/build/
 COPY --from=builder /workspace/apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar .
-
-#RUN rm -rf apps/ && rm -rf setup/cluster/ && rm -rf setup/scripts/ && rm -rf .git/ && rm -rf gradle* && rm -rf LICENSE && rm -rf README.md
-
-#RUN pwd && ls -al setup/docker/build/bin/setupKUBE.sh
 
 RUN ls -lRt
 
 WORKDIR bin/
-
-#RUN pwd && ls -al setupKUBE.sh
 
 RUN ./setupKUBE.sh ${kubeMicroservice}
 
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
 
-#WORKDIR /opt/mw/apps/kube/bin/
 #Start KUBE Microservice with Elastic Search
 ENTRYPOINT ["./startKUBE.sh"]
