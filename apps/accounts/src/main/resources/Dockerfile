@@ -40,7 +40,7 @@ MAINTAINER NAVIKCO <NAVIK.HUB@GMAIL.COM>
 VOLUME ["/opt/mw/mount"]
 RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
-ADD setup/docker/build/bin/ .
+#ADD setup/docker/build/bin/ .
 
 RUN echo "###BUILD :::>>> accounts"
 
@@ -61,5 +61,5 @@ USER kubeadm
 #WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
-#ENTRYPOINT ["java", "-jar", "accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
-ENTRYPOINT ["./startKUBE.sh"]
+ENTRYPOINT ["java", "-jar", "accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
+#ENTRYPOINT ["./startKUBE.sh"]
