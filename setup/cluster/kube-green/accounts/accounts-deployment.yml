@@ -16,7 +16,7 @@ spec:
     spec:
       serviceAccountName: kube-green-admin
       containers:
-        - image: localhost:5000/accounts:latest
+        - image: navikco/kube:accounts-0.0.0_01
           imagePullPolicy: Always
           name: accounts
           volumeMounts:
@@ -46,7 +46,7 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "1"
-          args: ["green", "accounts", "localhost", "8080"]
+          args: ["green", "localhost", "8080"]
           readinessProbe:
             httpGet:
               path: /actuator/health
