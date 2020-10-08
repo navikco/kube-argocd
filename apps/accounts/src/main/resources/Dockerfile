@@ -53,10 +53,10 @@ COPY --from=builder /workspace/apps/accounts/src/main/resources/logback-spring.x
 
 RUN pwd && ls -lRt
 
-RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
+RUN adduser -g kubeadm -s /bin/sh kubeadm -D && echo 'kubeadm:p@ss10n' | chpasswd && chown kubeadm:kubeadm -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
 
-# KUBE Docker Container Run as kubeadmin
-USER kubeadmin
+# KUBE Docker Container Run as kubeadm
+USER kubeadm
 
 #WORKDIR /opt/mw/apps/kube/
 
