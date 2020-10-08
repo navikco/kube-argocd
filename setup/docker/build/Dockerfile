@@ -21,7 +21,7 @@
 #           https://localhost:8080/kube/customers/info/index.html
 
 
-FROM gradle:jre8 AS builder
+FROM gradle:jdk8 AS builder
 ARG kubeMicroservice
 WORKDIR /workspace
 ADD ./ .
