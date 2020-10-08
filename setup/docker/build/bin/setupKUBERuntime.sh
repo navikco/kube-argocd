@@ -15,14 +15,14 @@ fi
 
 echo "###Setup KUBE Runtime Environment###"
 
-mkdir -p /opt/mw/apps/kube/${MICROSERVICE}/
+#mkdir -p /opt/mw/apps/kube/${MICROSERVICE}/
 
-kubeBase=${MICROSERVICE:0:3}
-echo "$MICROSERVICE :::>>> Evaluated kubeBase <<<${kubeBase}>>>"
+#kubeBase=${MICROSERVICE:0:3}
+#echo "$MICROSERVICE :::>>> Evaluated kubeBase <<<${kubeBase}>>>"
 
-mkdir -p /opt/mw/mount/logs/${kubeBase}/${MICROSERVICE}/
+#mkdir -p /opt/mw/mount/logs/${kubeBase}/${MICROSERVICE}/
 
-mv ../${MICROSERVICE}*.jar /opt/mw/apps/kube/${MICROSERVICE}/
+#mv ../${MICROSERVICE}*.jar /opt/mw/apps/kube/${MICROSERVICE}/
 
 chown kubeadmin:kubeadmin -R /opt/mw/
 

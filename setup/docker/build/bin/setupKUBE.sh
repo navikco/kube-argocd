@@ -24,7 +24,8 @@ fi
 
 chown kubeadmin:kubeadmin -R /opt/mw/apps/kube/
 
-./setupKUBERuntime.sh ${MICROSERVICE}
+#./setupKUBERuntime.sh ${MICROSERVICE}
+chown kubeadmin:kubeadmin -R /opt/mw/
 
 chmod 775 -R /opt/mw/
 
