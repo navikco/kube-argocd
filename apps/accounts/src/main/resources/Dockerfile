@@ -50,16 +50,17 @@ RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/C
 
 COPY --from=builder /workspace/apps/accounts/build/libs/accounts*.jar .
 COPY --from=builder /workspace/apps/accounts/src/main/resources/logback-spring.xml .
+COPY --from=builder /workspace/apps/accounts/src/main/resources/startKUBE.sh .
 
 RUN pwd && ls -lRt
 
-RUN adduser -g kubeadm -s /bin/sh kubeadm -D && echo 'kubeadm:p@ss10n' | chpasswd && chown kubeadm:kubeadm -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
+RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
 
-# KUBE Docker Container Run as kubeadm
-USER kubeadm
+# KUBE Docker Container Run as kubeadmin
+USER kubeadmin
 
 #WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["java", "-jar", "accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
-#ENTRYPOINT ["./startKUBE.sh"]
+#ENTRYPOINT ["java", "-jar", "accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
+ENTRYPOINT ["./startKUBE.sh"]
