@@ -40,7 +40,7 @@ USER root
 VOLUME ["/opt/mw/mount"]
 RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
-#ADD setup/docker/build/ .
+ADD setup/docker/build/bin/ .
 
 RUN echo "###BUILD :::>>> accounts"
 
@@ -59,7 +59,7 @@ RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | c
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
 
-WORKDIR /opt/mw/apps/kube/
+#WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
 ENTRYPOINT ["java", "-jar", "./accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
