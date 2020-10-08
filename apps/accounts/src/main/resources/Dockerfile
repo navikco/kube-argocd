@@ -55,7 +55,7 @@ RUN ls -lRt
 
 #WORKDIR bin/
 
-RUN adduser -g kube -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kube -R /opt/mw/apps/kube/ && chmod 775 -R /opt/mw/apps/kube/
+RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
 
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
