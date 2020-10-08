@@ -80,11 +80,9 @@ spec:
           name: kube-accounts-github
     params:
       - name: pathToDockerFile
-        value: ./setup/docker/build/Dockerfile
+        value: ./apps/accounts/src/main/resources/Dockerfile
       - name: pathToContext
         value: git://github.com/navikco/kube-argocd.git#refs/heads/master
-      - name: kubeMicroservice
-        value: admin
   outputs:
     resources:
       - name: accountsImage

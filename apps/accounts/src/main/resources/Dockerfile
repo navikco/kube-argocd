@@ -36,7 +36,7 @@ FROM fabric8/java-alpine-openjdk8-jre
 MAINTAINER NAVIKCO <NAVIK.HUB@GMAIL.COM>
 
 # KUBE Setup as Root
-USER root
+#USER root
 VOLUME ["/opt/mw/mount"]
 RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
@@ -51,8 +51,7 @@ RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/C
 COPY --from=builder /workspace/apps/accounts/build/libs/accounts*.jar .
 COPY --from=builder /workspace/apps/accounts/src/main/resources/logback-spring.xml .
 
-RUN ls -lRt
-
+RUN pwd && ls -lRt
 
 RUN adduser -g kubeadmin -s /bin/sh kubeadmin -D && echo 'kubeadmin:p@ss10n' | chpasswd && chown kubeadmin:kubeadmin -R /opt/mw/ && chmod 775 -R /opt/mw/ && ls -lRt
 
@@ -62,4 +61,5 @@ USER kubeadmin
 #WORKDIR /opt/mw/apps/kube/
 
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["java", "-jar", "./accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
+#ENTRYPOINT ["java", "-jar", "accounts-*.jar", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=${2}", "-DKUBE_ADMIN_PORT=${3}", "-DKUBE_PROFILE=${1}", "-Dspring.profiles.active=${1}", "-Dserver.ssl.enabled=false" ]
+ENTRYPOINT ["./startKUBE.sh"]
