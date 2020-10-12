@@ -1,66 +1,71 @@
-buildscript {
-
-    ext {
-        springBootVersion = '2.2.6.RELEASE'
-        springBootAdminVersion = '2.2.2'
-        springCloudVersion = '2.2.2.RELEASE'
-        springCloudKubernetesVersion = "1.1.2.RELEASE"
-
-        kubeBuildNumber = 12
-        buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
-        gitTagName = project.version
-    }
-
-    println "BuildNumber >>> " + kubeBuildNumber
-    println "BuildTime >>> " + buildTime
-
-    repositories {
-
-        mavenLocal()
-        mavenCentral()
-
-        maven {
-
-            url "http://repository.jboss.org/nexus/content/groups/public/"
-        }
-        maven {
-
-            url "http://repo.spring.io/milestone/"
-        }
-        maven {
-            url "https://plugins.gradle.org/m2/"
-        }
-        maven {
-
-            url "http://www.datanucleus.org/downloads/maven2/"
-        }
-        maven {
-
-            url "http://repo.spring.io/libs-milestone/"
-        }
-        maven {
-
-            url "https://artifacts.alfresco.com/nexus/content/groups/public/"
-        }
-        maven {
-
-            url 'https://repo.adobe.com/nexus/content/repositories/public/'
-        }
-    }
-    dependencies {
-
-        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
-        classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
-        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.0.0"
-        classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:0.11.0"
-        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.6"
-    }
-}
+//buildscript {
+//
+//    ext {
+//        springBootVersion = '2.2.6.RELEASE'
+//        springBootAdminVersion = '2.2.2'
+//        springCloudVersion = '2.2.2.RELEASE'
+//        springCloudKubernetesVersion = "1.1.2.RELEASE"
+//
+//        kubeBuildNumber = 12
+//        buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
+//        gitTagName = project.version
+//    }
+//
+//    println "BuildNumber >>> " + kubeBuildNumber
+//    println "BuildTime >>> " + buildTime
+//
+//    repositories {
+//
+//        mavenLocal()
+//        mavenCentral()
+//
+//        maven {
+//
+//            url "http://repository.jboss.org/nexus/content/groups/public/"
+//        }
+//        maven {
+//
+//            url "http://repo.spring.io/milestone/"
+//        }
+//        maven {
+//            url "https://plugins.gradle.org/m2/"
+//        }
+//        maven {
+//
+//            url "http://www.datanucleus.org/downloads/maven2/"
+//        }
+//        maven {
+//
+//            url "http://repo.spring.io/libs-milestone/"
+//        }
+//        maven {
+//
+//            url "https://artifacts.alfresco.com/nexus/content/groups/public/"
+//        }
+//        maven {
+//
+//            url 'https://repo.adobe.com/nexus/content/repositories/public/'
+//        }
+//    }
+//    dependencies {
+//
+//        classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
+//        classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
+//        classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.0.0"
+//        classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:0.11.0"
+//        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.6"
+//    }
+//}
 
 plugins {
 
     id "java"
-    id "com.google.cloud.tools.jib" version "2.4.0" apply "false"
+    id 'org.springframework.boot' version '2.3.2.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id "com.gorylenko.gradle-git-properties" version "2.2.3"
+    id "com.palantir.git-version" version "0.12.3"
+    id 'org.asciidoctor.convert' version '1.5.6'
+//    id "com.google.cloud.tools.jib" version "2.4.0" apply "false"
 }
 
 apply plugin: 'java'
@@ -73,6 +78,10 @@ apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
 apply plugin: com.gorylenko.GitPropertiesPlugin
 apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
 
+String kubeBuildNumber = 12
+String buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
+String gitTagName = project.version
+
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
@@ -81,8 +90,8 @@ springBoot {
     buildInfo {
         properties {
             additional = [
-                    'KubeBuildNumber': project.kubeBuildNumber,
-                    'BuildTime'      : project.buildTime
+                    'KubeBuildNumber': kubeBuildNumber,
+                    'BuildTime'      : buildTime
             ]
         }
     }
@@ -94,13 +103,13 @@ println "|||GIT State||| :-> $project.name"
 println "<<<"
 println "\tProject Name :-> $project.name"
 println "\tProject Version :-> $project.version"
-println "\tBuild No# :-> $project.kubeBuildNumber"
-println "\tNEW GIT <<<TAG Name>>> :-> $project.gitTagName"
+println "\tBuild No# :-> " + kubeBuildNumber
+println "\tNEW GIT <<<TAG Name>>> :-> " + gitTagName
 println ">>>"
 
-println "CALLER@Gradle@buildNumber >>> " + project.kubeBuildNumber
-println "CALLER@Gradle@BuildTime >>> " + project.buildTime
-println "CALLER@Gradle@GitTagName >>> " + project.gitTagName
+println "CALLER@Gradle@buildNumber >>> " + kubeBuildNumber
+println "CALLER@Gradle@BuildTime >>> " + buildTime
+println "CALLER@Gradle@GitTagName >>> " + gitTagName
 
 repositories {
 
@@ -145,13 +154,13 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
 
 
-    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web:2.3.2.RELEASE")
 
-    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
-    compile("org.springframework.boot:spring-boot-starter-actuator:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-security:2.3.2.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-actuator:2.3.2.RELEASE")
 
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-commons', version: "${springCloudVersion}"
-    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes-all', version: "${springCloudKubernetesVersion}"
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-commons', version: "2.2.2.RELEASE"
+    compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-kubernetes-all', version: "1.1.2.RELEASE"
     runtime group: 'org.springframework.cloud', name: 'spring-cloud-dependencies', version: 'Hoxton.RELEASE', ext: 'pom'
 
     compile 'org.glassfish.jersey.inject:jersey-hk2:2.26'
@@ -231,9 +240,9 @@ asciidoctor {
         println "ASCII-Doc : OutDir :-> " + restDocOutputDir
         println "ASCII-Doc : RestDocRoot :-> $restDoc"
         println "ASCII-Doc : ProjectName :-> $project.name"
-        println "ASCII-Doc : BuildNumber ::: >>> " + project.kubeBuildNumber
-        println "ASCII-Doc : BuildTime ::: >>> " + project.buildTime
-        println "ASCII-Doc : GitTAG ::: >>> " + project.gitTagName
+//        println "ASCII-Doc : BuildNumber ::: >>> " + project.kubeBuildNumber
+        println "ASCII-Doc : BuildTime ::: >>> " + buildTime
+        println "ASCII-Doc : GitTAG ::: >>> " + gitTagName
     }
 
     attributes 'snippets': snippets
@@ -247,7 +256,7 @@ asciidoctor {
         def props = new Properties()
         def propertyFile = file "build/resources/main/git.properties"
         props.load(new FileReader(propertyFile))
-        props.setProperty("git.tag", project.gitTagName)
+        props.setProperty("git.tag", gitTagName)
 
         def writer = new FileWriter(propertyFile)
         try {
