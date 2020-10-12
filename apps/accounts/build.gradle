@@ -53,12 +53,12 @@ buildscript {
         classpath "io.spring.gradle:dependency-management-plugin:1.0.7.RELEASE"
         classpath "gradle.plugin.com.gorylenko.gradle-git-properties:gradle-git-properties:2.0.0"
         classpath "gradle.plugin.com.palantir.gradle.gitversion:gradle-git-version:0.11.0"
-//        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.6"
+        classpath "org.asciidoctor:asciidoctor-gradle-plugin:1.5.6"
     }
 }
 
 plugins {
-    id 'com.google.cloud.tools.jib' version '2.6.0'
+    id 'java'
 }
 
 apply plugin: 'java'
@@ -67,7 +67,7 @@ apply plugin: 'maven'
 apply plugin: "org.springframework.boot"
 
 apply plugin: io.spring.gradle.dependencymanagement.DependencyManagementPlugin
-//apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
+apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
 apply plugin: com.gorylenko.GitPropertiesPlugin
 apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
 
@@ -172,87 +172,87 @@ test {
     systemProperties System.properties
 }
 
-//String restDoc = null
-//if (project.hasProperty("restDocRoot")) {
-//
-//    restDoc = restDocRoot
-//}
-//println "|||asciidoc.gradle@restDocRoot||| :-> $restDoc"
-//
-//String snippets = null
-//if (project.hasProperty("snippetsDir")) {
-//
-//    snippets = snippetsDir
-//}
-//println "|||asciidoc.gradle@snippetsDir||| :-> $snippets"
-//
-//String restDocOutputDir = null
-//if (project.hasProperty("outDir")) {
-//
-//    restDocOutputDir = outDir
-//}
-//println "|||asciidoc.gradle@outDir||| :-> $restDocOutputDir"
-//
-//ext {
-//
-//    snippets = file("$buildDir/generated-snippets")
-//    restDocOutputDir = file("$buildDir/asciidoc")
-//}
+String restDoc = null
+if (project.hasProperty("restDocRoot")) {
+
+    restDoc = restDocRoot
+}
+println "|||asciidoc.gradle@restDocRoot||| :-> $restDoc"
+
+String snippets = null
+if (project.hasProperty("snippetsDir")) {
+
+    snippets = snippetsDir
+}
+println "|||asciidoc.gradle@snippetsDir||| :-> $snippets"
+
+String restDocOutputDir = null
+if (project.hasProperty("outDir")) {
+
+    restDocOutputDir = outDir
+}
+println "|||asciidoc.gradle@outDir||| :-> $restDocOutputDir"
+
+ext {
+
+    snippets = file("$buildDir/generated-snippets")
+    restDocOutputDir = file("$buildDir/asciidoc")
+}
 
 test {
-//    outputs.dir snippets
+    outputs.dir snippets
     systemProperties System.properties
 }
 
 bootJar {
 
-//    println "JAR : RestDocRoot :-> $restDocRoot"
-//    println "JAR : Base Name :-> " + baseName
+    println "JAR : RestDocRoot :-> $restDocRoot"
+    println "JAR : Base Name :-> " + baseName
     println "JAR : Project Name :-> $project.name"
     println "JAR : Project Version :-> $project.version"
-//    println "JAR : OutDir :-> $buildDir/asciidoc"
+    println "JAR : OutDir :-> $buildDir/asciidoc"
 
-//    dependsOn asciidoctor
+    dependsOn asciidoctor
 
-//    from("$buildDir/asciidoc/html5") {
-//
-//        into "static/kube/$restDocRoot/info"
-//    }
+    from("$buildDir/asciidoc/html5") {
+
+        into "static/kube/$restDocRoot/info"
+    }
 }
 
-//asciidoctor {
-//
-//    if (!project.name.equalsIgnoreCase("repository")) {
-//
-//        println "ASCII-Doc : SnippetsDir :-> " + snippets
-//        println "ASCII-Doc : BuildDir :-> $buildDir"
-//        println "ASCII-Doc : OutDir :-> " + restDocOutputDir
-//        println "ASCII-Doc : RestDocRoot :-> $restDoc"
-//        println "ASCII-Doc : ProjectName :-> $project.name"
-//        println "ASCII-Doc : BuildNumber ::: >>> " + project.kubeBuildNumber
-//        println "ASCII-Doc : BuildTime ::: >>> " + project.buildTime
-//        println "ASCII-Doc : GitTAG ::: >>> " + project.gitTagName
-//    }
-//
-//    attributes 'snippets': snippets
-//    inputs.dir snippets
-//    outputDir restDocOutputDir
-//    dependsOn test
-//    sourceDir 'src/main/asciidoc'
-//
-//    doLast {
-//
-//        def props = new Properties()
-//        def propertyFile = file "build/resources/main/git.properties"
-//        props.load(new FileReader(propertyFile))
-//        props.setProperty("git.tag", project.gitTagName)
-//
-//        def writer = new FileWriter(propertyFile)
-//        try {
-//            props.store(writer, 'Newly appended contents')
-//            writer.flush()
-//        } finally {
-//            writer.close()
-//        }
-//    }
-//}
+asciidoctor {
+
+    if (!project.name.equalsIgnoreCase("repository")) {
+
+        println "ASCII-Doc : SnippetsDir :-> " + snippets
+        println "ASCII-Doc : BuildDir :-> $buildDir"
+        println "ASCII-Doc : OutDir :-> " + restDocOutputDir
+        println "ASCII-Doc : RestDocRoot :-> $restDoc"
+        println "ASCII-Doc : ProjectName :-> $project.name"
+        println "ASCII-Doc : BuildNumber ::: >>> " + project.kubeBuildNumber
+        println "ASCII-Doc : BuildTime ::: >>> " + project.buildTime
+        println "ASCII-Doc : GitTAG ::: >>> " + project.gitTagName
+    }
+
+    attributes 'snippets': snippets
+    inputs.dir snippets
+    outputDir restDocOutputDir
+    dependsOn test
+    sourceDir 'src/main/asciidoc'
+
+    doLast {
+
+        def props = new Properties()
+        def propertyFile = file "build/resources/main/git.properties"
+        props.load(new FileReader(propertyFile))
+        props.setProperty("git.tag", project.gitTagName)
+
+        def writer = new FileWriter(propertyFile)
+        try {
+            props.store(writer, 'Newly appended contents')
+            writer.flush()
+        } finally {
+            writer.close()
+        }
+    }
+}
