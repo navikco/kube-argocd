@@ -47,7 +47,6 @@ buildscript {
             url 'https://repo.adobe.com/nexus/content/repositories/public/'
         }
     }
-
     dependencies {
 
         classpath group: 'org.springframework.boot', name: 'spring-boot-gradle-plugin', version: "${springBootVersion}"
@@ -58,8 +57,12 @@ buildscript {
     }
 }
 
-apply plugin: 'idea'
+plugins {
+    id 'com.google.cloud.tools.jib' version '2.6.0'
+}
+
 apply plugin: 'java'
+apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: "org.springframework.boot"
 
