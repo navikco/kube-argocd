@@ -18,7 +18,7 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: git://github.com/navikco/kube-argocd.git#refs/heads/master
+          value: git://github.com/navikco/kube-argocd.git
         - name: subdirectory
           value: "apps/accounts"
         - name: deleteExisting
