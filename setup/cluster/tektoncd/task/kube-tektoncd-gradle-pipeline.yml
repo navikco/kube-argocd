@@ -13,8 +13,6 @@ spec:
     - name: jib-gradle
       taskRef:
         name: jib-gradle
-      runAfter:
-        - fetch-repository
       workspaces:
         - name: source
           workspace: shared-workspace
