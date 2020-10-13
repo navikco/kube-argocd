@@ -20,9 +20,9 @@ spec:
         - name: url
           value: git://github.com/navikco/kube-argocd.git
         - name: subdirectory
-          value: "apps/accounts"
+          value: apps/accounts
         - name: deleteExisting
-          value: "true"
+          value: true
     - name: jib-gradle
       taskRef:
         name: jib-gradle
