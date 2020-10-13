@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: kube-tektoncd-jib-gradle-taskrun
+  namespace: kube-tekton-cd
+spec:
+  taskRef:
+    name: jib-gradle
+  params:
+    - name: DIRECTORY
+      value: ./apps/accounts/
+  workspaces:
+    - name: source
+      emptyDir: {}
+  resources:
+    outputs:
+      - name: image
+        resourceRef:
+          name: kube-accounts-dockerhub

@@ -1,0 +1,25 @@
+apiVersion: tekton.dev/v1beta1
+kind: TaskRun
+metadata:
+  name: kube-github-webhook-taskrun
+  namespace: kube-tekton-cd
+spec:
+  taskRef:
+    name: kube-github-webhook-task
+  params:
+    - name: GitHubOrg
+      value: "NavikCo"
+    - name: GitHubUser
+      value: "navikco"
+    - name: GitHubRepo
+      value: "kube-argocd"
+    - name: GitHubSecretName
+      value: kube-webhook-secret
+    - name: GitHubAccessTokenKey
+      value: token
+    - name: GitHubSecretStringKey
+      value: secret
+    - name: ExternalDomain
+      value: navikco.io
+  timeout: 1000s
+  serviceAccountName: kube-github-webhook-sa
