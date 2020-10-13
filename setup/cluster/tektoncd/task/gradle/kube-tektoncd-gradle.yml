@@ -8,7 +8,7 @@ spec:
     name: jib-gradle
   params:
     - name: DIRECTORY
-      value: ./apps/accounts/
+      value: apps/accounts/
   workspaces:
     - name: source
       emptyDir: {}
