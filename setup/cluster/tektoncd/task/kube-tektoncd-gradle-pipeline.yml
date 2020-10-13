@@ -12,35 +12,35 @@ spec:
     - name: accountsImage
       type: image
   tasks:
-    - name: fetch-repository
-      taskRef:
-        name: git-clone
-      resources:
-        inputs:
-          - name: gitRepo
-            resource: accountsRepo
-        outputs:
-          - name: builtImage
-            resource: accountsImage
-      workspaces:
-        - name: output
-          workspace: shared-workspace
-      params:
-#        - name: url
-#          value: "https://github.com/navikco/kube-argocd.git"
-        - name: subdirectory
-          value: "apps/accounts"
-        - name: deleteExisting
-          value: "true"
-        - name: submodules
-          value: "false"
-        - name: depth
-          value: "2"
+#    - name: fetch-repository
+#      taskRef:
+#        name: git-clone
+#      resources:
+#        inputs:
+#          - name: gitRepo
+#            resource: accountsRepo
+#        outputs:
+#          - name: builtImage
+#            resource: accountsImage
+#      workspaces:
+#        - name: output
+#          workspace: shared-workspace
+#      params:
+##        - name: url
+##          value: "https://github.com/navikco/kube-argocd.git"
+#        - name: subdirectory
+#          value: "apps/accounts"
+#        - name: deleteExisting
+#          value: "true"
+#        - name: submodules
+#          value: "false"
+#        - name: depth
+#          value: "2"
     - name: jib-gradle
       taskRef:
         name: jib-gradle
-      runAfter:
-        - fetch-repository
+#      runAfter:
+#        - fetch-repository
       workspaces:
         - name: source
           workspace: shared-workspace
