@@ -7,26 +7,32 @@ spec:
   workspaces:
     - name: shared-workspace
   resources:
-    - name: build-image
+    - name: accountsRepo
+      type: git
+    - name: accountsImage
       type: image
   tasks:
     - name: fetch-repository
       taskRef:
         name: git-clone
+      inputs:
+        resources:
+          - name: accountsRepo
+            type: git
       workspaces:
         - name: output
           workspace: shared-workspace
-      params:
-        - name: url
-          value: "https://github.com/navikco/kube-argocd.git"
-        - name: subdirectory
-          value: "apps/accounts"
-        - name: deleteExisting
-          value: "true"
-        - name: submodules
-          value: "false"
-        - name: depth
-          value: "2"
+#      params:
+#        - name: url
+#          value: "https://github.com/navikco/kube-argocd.git"
+#        - name: subdirectory
+#          value: "apps/accounts"
+#        - name: deleteExisting
+#          value: "true"
+#        - name: submodules
+#          value: "false"
+#        - name: depth
+#          value: "2"
     - name: jib-gradle
       taskRef:
         name: jib-gradle
@@ -41,7 +47,12 @@ spec:
       resources:
         outputs:
           - name: image
-            resource: build-image
+            resource: accountsImage
+  outputs:
+    resources:
+      - name: accountsImage
+        resourceRef:
+          name: kube-accounts-dockerhub
 ---
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
@@ -57,6 +68,12 @@ spec:
       persistentvolumeclaim:
         claimName: jib-gradle-source-pvc
   resources:
-    - name: build-image
+    - name: accountsRepo
+      resourceRef:
+        name: kube-accounts-github
+    - name: accountsImage
       resourceRef:
         name: kube-accounts-dockerhub
+#    - name: build-image
+#      resourceRef:
+#        name: kube-accounts-dockerhub
