@@ -4,7 +4,7 @@ metadata:
   name: kube-tektoncd-jib-gradle-taskrun
   namespace: kube-tekton-cd
 spec:
-  serviceAccountName: navikco-sa
+  serviceAccountName: kube-github-admin-sa
   taskRef:
     name: jib-gradle
   params:
