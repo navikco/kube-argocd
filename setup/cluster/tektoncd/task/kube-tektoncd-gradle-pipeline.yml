@@ -4,6 +4,7 @@ metadata:
   name: kube-tektoncd-jib-gradle-pipeline
   namespace: kube-tekton-cd
 spec:
+  serviceAccountName: navikco-sa
   workspaces:
     - name: shared-workspace
   resources:
