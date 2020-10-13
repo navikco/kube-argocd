@@ -18,11 +18,11 @@ spec:
           workspace: shared-workspace
       params:
         - name: url
-          value: git://github.com/navikco/kube-argocd.git
+          value: "https://github.com/navikco/kube-argocd.git"
         - name: subdirectory
           value: "apps/accounts"
         - name: deleteExisting
-          value: true
+          value: "true"
     - name: jib-gradle
       taskRef:
         name: jib-gradle
