@@ -7,8 +7,8 @@ spec:
   workspaces:
     - name: shared-workspace
   resources:
-    - name: accountsRepo
-      type: git
+#    - name: accountsRepo
+#      type: git
     - name: accountsImage
       type: image
   tasks:
@@ -66,9 +66,9 @@ spec:
       persistentvolumeclaim:
         claimName: jib-gradle-source-pvc
   resources:
-    - name: accountsRepo
-      resourceRef:
-        name: kube-accounts-github
+#    - name: accountsRepo
+#      resourceRef:
+#        name: kube-accounts-github
     - name: accountsImage
       resourceRef:
         name: kube-accounts-dockerhub
