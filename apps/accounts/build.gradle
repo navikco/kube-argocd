@@ -88,7 +88,7 @@ allprojects {
         container.mainClass = "WebAppKt"
 //        java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
         extraDirectories.paths = bootJar.destinationDir
-        container.entrypoint = "java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${3} -DKUBE_ADMIN_PORT=${4} -DKUBE_PROFILE=${1} -Dspring.profiles.active=${1} -Dserver.ssl.enabled=false -jar " + bootJar.archiveName
+        container.entrypoint = "java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${3} -DKUBE_ADMIN_PORT=${4} -DKUBE_PROFILE=${1} -Dspring.profiles.active=${1} -Dserver.ssl.enabled=false -jar " + bootJar.destinationDir + "/" + bootJar.archiveName
 //        container.entrypoint = ['java', '-Dserver.port=8080', '-DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST}', '-DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT}', '-DKUBE_PROFILE=${ENVIRONMENT}', '-Dspring.profiles.active=${ENVIRONMENT}', '-Dserver.ssl.enabled=false', '-jar', bootJar.archiveName]
     }
 
