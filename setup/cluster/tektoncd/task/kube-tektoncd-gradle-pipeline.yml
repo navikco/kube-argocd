@@ -11,7 +11,6 @@ spec:
       type: image
   tasks:
     - name: fetch-repository
-      serviceAccountName: kube-github-admin-sa
       taskRef:
         name: git-clone
       workspaces:
