@@ -48,11 +48,6 @@ spec:
         outputs:
           - name: image
             resource: accountsImage
-  outputs:
-    resources:
-      - name: accountsImage
-        resourceRef:
-          name: kube-accounts-dockerhub
 ---
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
