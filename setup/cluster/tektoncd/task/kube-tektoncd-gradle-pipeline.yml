@@ -23,6 +23,10 @@ spec:
           value: "apps/accounts"
         - name: deleteExisting
           value: "true"
+        - name: submodules
+          value: "false"
+        - name: depth
+          value: "2"
     - name: jib-gradle
       taskRef:
         name: jib-gradle
