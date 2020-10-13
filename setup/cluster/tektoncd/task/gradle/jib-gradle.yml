@@ -41,6 +41,7 @@ spec:
                 dependencies { classpath 'gradle.plugin.com.google.cloud.tools:jib-gradle-plugin:+' }
               }
               rootProject {
+                apply plugin: 'java'
                 afterEvaluate {
                   if (!project.plugins.hasPlugin('com.google.cloud.tools.jib')) {
                     project.apply plugin: com.google.cloud.tools.jib.gradle.JibPlugin
