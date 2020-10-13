@@ -4,26 +4,12 @@ metadata:
   name: kube-tektoncd-jib-gradle-pipeline
   namespace: kube-tekton-cd
 spec:
-  serviceAccountName: navikco-sa
   workspaces:
     - name: shared-workspace
   resources:
     - name: build-image
       type: image
   tasks:
-    - name: fetch-repository
-      taskRef:
-        name: git-clone
-      workspaces:
-        - name: output
-          workspace: shared-workspace
-      params:
-        - name: url
-          value: https://github.com/navikco/kube-argocd.git
-        - name: subdirectory
-          value: "apps/accounts"
-        - name: deleteExisting
-          value: "true"
     - name: jib-gradle
       taskRef:
         name: jib-gradle
