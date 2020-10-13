@@ -130,3 +130,36 @@ Using generated security password: 1fedb78a-4557-432a-8f1a-4f7a89163c58
 2020-10-12 21:33:04.804  INFO 15970 --- [extShutdownHook] -5level o.s.s.concurrent.ThreadPoolTaskExecutor  : - Shutting down ExecutorService 'applicationTaskExecutor' 
 2020-10-12 21:33:04.805  INFO 15970 --- [extShutdownHook] -5level n.k.land.accounts.AccountsApplication    : - DESTROYING :::>>> accounts ::: Spring.Profiles.Active :-> local 
 2020-10-12 21:33:04.806  INFO 15970 --- [extShutdownHook] -5level n.k.land.accounts.AccountsApplication    : - DESTROYED :::>>> accounts ::: Spring.Profiles.Active :-> local 
+2020-10-13 08:26:30.036  WARN 26916 --- [    Test worker] -5level o.s.c.k.KubernetesAutoConfiguration      : - No namespace has been detected. Please specify KUBERNETES_NAMESPACE env var, or use a later kubernetes version (1.3 or later) 
+2020-10-13 08:26:30.685  INFO 26916 --- [    Test worker] -5level b.c.PropertySourceBootstrapConfiguration : - Located property source: [BootstrapPropertySource {name='bootstrapProperties-configmap.accounts.null'}] 
+2020-10-13 08:26:30.707  WARN 26916 --- [    Test worker] -5level ory$DuplicateJsonObjectContextCustomizer : - 
+
+Found multiple occurrences of org.json.JSONObject on the class path:
+
+	jar:file:/Users/Himanshu/.gradle/caches/modules-2/files-2.1/org.json/json/20190722/7bce7bacf0ab5e9f894d307a3de8b7f540064d5/json-20190722.jar!/org/json/JSONObject.class
+	jar:file:/Users/Himanshu/.m2/repository/com/vaadin/external/google/android-json/0.0.20131108.vaadin1/android-json-0.0.20131108.vaadin1.jar!/org/json/JSONObject.class
+
+You may wish to exclude one of them to ensure predictable runtime behavior
+ 
+2020-10-13 08:26:30.711  INFO 26916 --- [    Test worker] -5level n.k.l.a.c.AccountControllerTest          : - The following profiles are active: local 
+2020-10-13 08:26:31.446  WARN 26916 --- [    Test worker] -5level o.s.boot.actuate.endpoint.EndpointId     : - Endpoint ID 'service-registry' contains invalid characters, please migrate to a valid format. 
+2020-10-13 08:26:31.648  INFO 26916 --- [    Test worker] -5level o.s.cloud.context.scope.GenericScope     : - BeanFactory id=88c0d5f4-ff7f-348a-845a-c37b4e9dbf62 
+2020-10-13 08:26:32.246  INFO 26916 --- [    Test worker] -5level .s.s.UserDetailsServiceAutoConfiguration : - 
+
+Using generated security password: 6f5de5bb-89b4-4b4b-8ff4-774ccb4ddc49
+ 
+2020-10-13 08:26:32.393  INFO 26916 --- [    Test worker] -5level o.s.s.web.DefaultSecurityFilterChain     : - Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@e0ae844, org.springframework.security.web.context.SecurityContextPersistenceFilter@32cd4362, org.springframework.security.web.header.HeaderWriterFilter@75ff5731, org.springframework.security.web.authentication.logout.LogoutFilter@78628536, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5231f2c7, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a76eaf1, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@45d765d0, org.springframework.security.web.session.SessionManagementFilter@437c398d, org.springframework.security.web.access.ExceptionTranslationFilter@77ffbe, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2dcb7e00] 
+2020-10-13 08:26:32.724  INFO 26916 --- [    Test worker] -5level o.s.s.concurrent.ThreadPoolTaskExecutor  : - Initializing ExecutorService 'applicationTaskExecutor' 
+2020-10-13 08:26:33.259  INFO 26916 --- [    Test worker] -5level o.s.s.c.ThreadPoolTaskScheduler          : - Initializing ExecutorService 'taskScheduler' 
+2020-10-13 08:26:33.379  INFO 26916 --- [    Test worker] -5level o.s.b.a.e.web.EndpointLinksResolver      : - Exposing 2 endpoint(s) beneath base path '/actuator' 
+2020-10-13 08:26:33.450  INFO 26916 --- [    Test worker] -5level n.k.l.a.c.AccountControllerTest          : - Started AccountControllerTest in 4.926 seconds (JVM running for 5.951) 
+2020-10-13 08:26:33.727  INFO 26916 --- [    Test worker] -5level o.s.b.t.m.w.SpringBootMockServletContext : - Initializing Spring TestDispatcherServlet '' 
+2020-10-13 08:26:33.728  INFO 26916 --- [    Test worker] -5level o.s.t.web.servlet.TestDispatcherServlet  : - Initializing Servlet '' 
+2020-10-13 08:26:33.739  INFO 26916 --- [    Test worker] -5level o.s.t.web.servlet.TestDispatcherServlet  : - Completed initialization in 11 ms 
+2020-10-13 08:26:33.860  INFO 26916 --- [    Test worker] -5level o.s.b.t.m.w.SpringBootMockServletContext : - Initializing Spring TestDispatcherServlet '' 
+2020-10-13 08:26:33.861  INFO 26916 --- [    Test worker] -5level o.s.t.web.servlet.TestDispatcherServlet  : - Initializing Servlet '' 
+2020-10-13 08:26:33.862  INFO 26916 --- [    Test worker] -5level o.s.t.web.servlet.TestDispatcherServlet  : - Completed initialization in 1 ms 
+2020-10-13 08:26:33.896  INFO 26916 --- [extShutdownHook] -5level o.s.s.c.ThreadPoolTaskScheduler          : - Shutting down ExecutorService 'taskScheduler' 
+2020-10-13 08:26:33.897  INFO 26916 --- [extShutdownHook] -5level o.s.s.concurrent.ThreadPoolTaskExecutor  : - Shutting down ExecutorService 'applicationTaskExecutor' 
+2020-10-13 08:26:33.900  INFO 26916 --- [extShutdownHook] -5level n.k.land.accounts.AccountsApplication    : - DESTROYING :::>>> accounts ::: Spring.Profiles.Active :-> local 
+2020-10-13 08:26:33.900  INFO 26916 --- [extShutdownHook] -5level n.k.land.accounts.AccountsApplication    : - DESTROYED :::>>> accounts ::: Spring.Profiles.Active :-> local 

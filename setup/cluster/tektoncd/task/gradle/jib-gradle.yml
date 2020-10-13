@@ -47,9 +47,6 @@ spec:
                     project.apply plugin: com.google.cloud.tools.jib.gradle.JibPlugin
                   }
                 }
-                application {
-                  mainClassName = "WebAppKt"
-                }
               }" > $HOME/init-script.gradle
         # Runs the Gradle Jib build.
         gradle jib \

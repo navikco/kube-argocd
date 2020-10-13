@@ -83,6 +83,10 @@ allprojects {
 
     tasks.jib.dependsOn tasks.build
 
+    jib {
+        container.mainClass = "WebAppKt"
+    }
+
     String kubeBuildNumber = 12
     String buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
     String gitTagName = project.version
