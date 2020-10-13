@@ -10,15 +10,31 @@ spec:
     - name: build-image
       type: image
   tasks:
+    - name: fetch-repository
+      serviceAccountName: kube-github-admin-sa
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: shared-workspace
+      params:
+        - name: url
+          value: https://github.com/navikco/kube-argocd.git
+        - name: subdirectory
+          value: "apps/accounts"
+        - name: deleteExisting
+          value: "true"
     - name: jib-gradle
       taskRef:
         name: jib-gradle
+      runAfter:
+        - fetch-repository
       workspaces:
         - name: source
           workspace: shared-workspace
       params:
         - name: INSECUREREGISTRY
-          value: "true"
+          value: "false"
       resources:
         outputs:
           - name: image
@@ -30,7 +46,7 @@ metadata:
   name: kube-tektoncd-jib-gradle-pipeline-run
   namespace: kube-tekton-cd
 spec:
-  serviceAccountName: navikco-sa
+  serviceAccountName: kube-github-admin-sa
   pipelineRef:
     name: kube-tektoncd-jib-gradle-pipeline
   workspaces:
