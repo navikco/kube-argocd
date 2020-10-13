@@ -15,10 +15,6 @@ spec:
     - name: fetch-repository
       taskRef:
         name: git-clone
-      inputs:
-        resources:
-          - name: accountsRepo
-            type: git
       workspaces:
         - name: output
           workspace: shared-workspace
