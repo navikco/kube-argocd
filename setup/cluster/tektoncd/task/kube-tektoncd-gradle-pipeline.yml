@@ -45,7 +45,7 @@ metadata:
   name: kube-tektoncd-jib-gradle-pipeline-run
   namespace: kube-tekton-cd
 spec:
-  serviceAccountName: kube-github-admin-sa
+  serviceAccountName: navikco-sa
   pipelineRef:
     name: kube-tektoncd-jib-gradle-pipeline
   workspaces:

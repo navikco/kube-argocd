@@ -4,11 +4,12 @@ metadata:
   name: kube-tektoncd-jib-gradle-taskrun
   namespace: kube-tekton-cd
 spec:
+  serviceAccountName: navikco-sa
   taskRef:
     name: jib-gradle
   params:
     - name: DIRECTORY
-      value: apps/accounts/
+      value: ./apps/accounts/
   workspaces:
     - name: source
       emptyDir: {}
