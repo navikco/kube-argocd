@@ -84,7 +84,10 @@ allprojects {
     tasks.jib.dependsOn tasks.build
 
     jib {
+
         container.mainClass = "WebAppKt"
+        container.entrypoint = "java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${4} -DKUBE_ADMIN_PORT=${4} -DKUBE_PROFILE=${1} -Dspring.profiles.active=${1} -Dserver.ssl.enabled=false -jar ${2}-*.jar"
+//        java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
     }
 
     String kubeBuildNumber = 12

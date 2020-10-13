@@ -26,6 +26,9 @@ spec:
   workspaces:
     - name: source
   resources:
+    inputs:
+      - name: source
+        type: git
     outputs:
       - name: image
         type: image

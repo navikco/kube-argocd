@@ -4,11 +4,11 @@ metadata:
   name: kube-tektoncd-jib-gradle-pipeline
   namespace: kube-tekton-cd
 spec:
-  workspaces:
-    - name: shared-workspace
+#  workspaces:
+#    - name: shared-workspace
   resources:
-#    - name: accountsRepo
-#      type: git
+    - name: accountsRepo
+      type: git
     - name: accountsImage
       type: image
   tasks:
@@ -41,15 +41,20 @@ spec:
         name: jib-gradle
 #      runAfter:
 #        - fetch-repository
-      workspaces:
-        - name: source
-          workspace: shared-workspace
+#      workspaces:
+#        - name: source
+#          workspace: shared-workspace
       params:
         - name: INSECUREREGISTRY
-          value: "false"
+          value: "true"
+        - name: DIRECTORY
+          value: ./apps/accounts/
       resources:
+        inputs:
+          - name: gitRepo
+            resource: accountsRepo
         outputs:
-          - name: builtImage
+          - name: image
             resource: accountsImage
 ---
 apiVersion: tekton.dev/v1beta1
@@ -58,17 +63,17 @@ metadata:
   name: kube-tektoncd-jib-gradle-pipeline-run
   namespace: kube-tekton-cd
 spec:
-  serviceAccountName: kube-github-admin-sa
+  serviceAccountName: navikco-sa
   pipelineRef:
     name: kube-tektoncd-jib-gradle-pipeline
-  workspaces:
-    - name: shared-workspace
-      persistentvolumeclaim:
-        claimName: jib-gradle-source-pvc
+#  workspaces:
+#    - name: shared-workspace
+#      persistentvolumeclaim:
+#        claimName: jib-gradle-source-pvc
   resources:
-#    - name: accountsRepo
-#      resourceRef:
-#        name: kube-accounts-github
+    - name: accountsRepo
+      resourceRef:
+        name: kube-accounts-github
     - name: accountsImage
       resourceRef:
         name: kube-accounts-dockerhub
