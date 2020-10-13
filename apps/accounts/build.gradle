@@ -59,13 +59,13 @@
 
 plugins {
 
+    id "com.google.cloud.tools.jib" version '2.6.0'
     id "java"
     id 'org.springframework.boot' version '2.3.2.RELEASE'
     id 'io.spring.dependency-management' version '1.0.8.RELEASE'
     id "com.gorylenko.gradle-git-properties" version "2.2.3"
     id "com.palantir.git-version" version "0.12.3"
     id 'org.asciidoctor.convert' version '1.5.6'
-    id "com.google.cloud.tools.jib" version "2.4.0"
 }
 
 allprojects {
@@ -79,6 +79,8 @@ allprojects {
     apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
     apply plugin: com.gorylenko.GitPropertiesPlugin
     apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
+
+    tasks.jib.dependsOn tasks.build
 
     String kubeBuildNumber = 12
     String buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")
