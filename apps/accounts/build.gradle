@@ -84,7 +84,7 @@ allprojects {
     tasks.jib.dependsOn tasks.build
     jib {
 
-        from.image = "fabric8/java-alpine-openjdk8-jre"
+        from.image = "registry://fabric8/java-alpine-openjdk8-jre"
 
         extraDirectories {
             paths {
@@ -101,7 +101,7 @@ allprojects {
             }
         }
 
-        dockerClient.executable = "/usr/local/bin/docker"
+//        dockerClient.executable = "/usr/local/bin/docker"
 //        container.mainClass = "WebAppKt"
 //        java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
 //        extraDirectories.paths = bootJar.destinationDir
