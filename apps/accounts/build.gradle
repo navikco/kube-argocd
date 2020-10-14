@@ -89,12 +89,12 @@ allprojects {
                 path {
                     // copies the contents of 'src/main/another/dir' into '/extras' on the container
                     from = file('/workspace/source/apps/accounts/build/libs/')
-                    into = '/app/libs/'
+                    into = '/app/'
                 }
                 path {
                     // copies the contents of 'src/main/another/dir' into '/extras' on the container
                     from = file('/workspace/source/apps/accounts/build/resources/main/logback/')
-                    into = '/app/libs/'
+                    into = '/app/'
                 }
             }
         }
