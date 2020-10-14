@@ -6,7 +6,7 @@ spring:
 
 logging:
   file: ./${spring.application.name}/${spring.cloud.client.ip-address}/${spring.application.name}.log
-  config: ./logback-spring.xml
+  config: /app/libs/logback-spring.xml
 
 ---
 
