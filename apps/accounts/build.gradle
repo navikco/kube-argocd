@@ -83,7 +83,8 @@ allprojects {
 
     tasks.jib.dependsOn tasks.build
     jib {
-        container.from.image = "fabric8/java-alpine-openjdk8-jre"
+        
+        from.image = "fabric8/java-alpine-openjdk8-jre"
         extraDirectories {
             paths {
                 path {
