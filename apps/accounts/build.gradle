@@ -82,6 +82,7 @@ allprojects {
     apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
 
     tasks.jib.dependsOn tasks.build
+    jib.console = "plain"
     jib {
         extraDirectories {
             paths {
@@ -98,7 +99,6 @@ allprojects {
             }
         }
 
-        console = "plain"
         container.mainClass = "WebAppKt"
 //        java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
 //        extraDirectories.paths = bootJar.destinationDir
