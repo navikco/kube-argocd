@@ -93,7 +93,7 @@ allprojects {
                 }
                 path {
                     // copies the contents of 'src/main/another/dir' into '/extras' on the container
-                    from = file('/workspace/source/apps/accounts/build/resources/main/logback-spring.xml')
+                    from = file('/workspace/source/apps/accounts/build/resources/main/logback/')
                     into = '/app/libs/'
                 }
             }
