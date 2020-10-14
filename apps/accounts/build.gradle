@@ -82,7 +82,6 @@ allprojects {
     apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
 
     tasks.jib.dependsOn tasks.build
-    jib.console = "plain"
     jib {
         extraDirectories {
             paths {
