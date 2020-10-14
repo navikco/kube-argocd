@@ -91,25 +91,18 @@ allprojects {
                 path {
                     // copies the contents of 'src/main/another/dir' into '/extras' on the container
                     from = file('/workspace/source/apps/accounts/build/libs/')
-                    into = '/app/'
+                    into = '/app/libs/'
                 }
                 path {
                     // copies the contents of 'src/main/another/dir' into '/extras' on the container
                     from = file('/workspace/source/apps/accounts/build/resources/main/logback/')
-                    into = '/app/'
+                    into = '/app/libs/'
                 }
             }
         }
 
-//        dockerClient.executable = "/usr/local/bin/docker"
-//        container.mainClass = "WebAppKt"
-//        java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
-//        extraDirectories.paths = bootJar.destinationDir
-//        container.entrypoint = "java -Dserver.port=8080 -DKUBE_ADMIN_HOST=localhost -DKUBE_ADMIN_PORT=8080 -DKUBE_PROFILE=green -Dspring.profiles.active=green -Dserver.ssl.enabled=false -jar /app/libs/" + bootJar.archiveName
-//        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=localhost", "-DKUBE_ADMIN_PORT=8080", "-DKUBE_PROFILE=green", "-Dspring.profiles.active=green", "-Dserver.ssl.enabled=false", "-jar", "app/libs/accounts-*.jar"]
-        container.entrypoint = ["sleep"]
+        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=localhost", "-DKUBE_ADMIN_PORT=8080", "-DKUBE_PROFILE=green", "-Dspring.profiles.active=green", "-Dserver.ssl.enabled=false", "-jar", "app/libs/accounts-*.jar"]
         container.user = "kubeadmin:kube"
-//        container.entrypoint = ['java', '-Dserver.port=8080', '-DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST}', '-DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT}', '-DKUBE_PROFILE=${ENVIRONMENT}', '-Dspring.profiles.active=${ENVIRONMENT}', '-Dserver.ssl.enabled=false', '-jar', bootJar.archiveName]
     }
 
     String kubeBuildNumber = 12
