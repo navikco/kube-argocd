@@ -101,7 +101,7 @@ allprojects {
             }
         }
 
-        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=localhost", "-DKUBE_ADMIN_PORT=8080", "-DKUBE_PROFILE=green", "-Dspring.profiles.active=green", "-Dserver.ssl.enabled=false", "-jar", "app/libs/accounts-*.jar"]
+        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=localhost", "-DKUBE_ADMIN_PORT=8080", "-DKUBE_PROFILE=green", "-Dspring.profiles.active=green", "-Dserver.ssl.enabled=false", "-jar", "app/libs/accounts-1.3.0.jar"]
         container.user = "kubeadmin:kube"
     }
 
