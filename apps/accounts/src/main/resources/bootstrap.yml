@@ -5,7 +5,7 @@ spring:
     active: local
 
 logging:
-  file: ./${spring.application.name}/${spring.cloud.client.ip-address}/${spring.application.name}.log
+  file: /app/${spring.application.name}/${spring.cloud.client.ip-address}/${spring.application.name}.log
   config: /app/libs/logback-spring.xml
 
 ---
