@@ -46,7 +46,7 @@ spec:
             limits:
               memory: "500Mi"
               cpu: "1"
-          args: ["green", "accounts", "localhost", "8080"]
+          args: ["240"]
           readinessProbe:
             httpGet:
               path: /actuator/health

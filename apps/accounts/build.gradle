@@ -88,10 +88,10 @@ allprojects {
 
         extraDirectories {
             paths {
-//                path {
-//                    from = file('/workspace/source/apps/accounts/build/libs/')
-//                    into = '/app/libs/'
-//                }
+                path {
+                    from = file('/workspace/source/apps/accounts/build/libs/')
+                    into = '/app/libs/'
+                }
                 path {
                     from = file('/workspace/source/apps/accounts/build/resources/main/logback/')
                     into = '/app/libs/'
@@ -99,6 +99,7 @@ allprojects {
             }
         }
 
+//        container.entrypoint = ["sleep"]
         container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=\$3", "-DKUBE_ADMIN_PORT=\$4", "-DKUBE_PROFILE=\$1", "-Dspring.profiles.active=\$1", "-Dserver.ssl.enabled=false", "-jar", "/app/libs/" + bootJar.archiveName]
         container.user = "kubeadmin:kube"
     }
