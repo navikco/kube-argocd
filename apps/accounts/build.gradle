@@ -99,12 +99,16 @@ allprojects {
                     into = '/app/libs/'
                 }
             }
-            permissions = [
-                    '/app/libs/': '777',  // Read/write/execute for owner, read/execute for group/other
-            ]
         }
 
-        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=localhost", "-DKUBE_ADMIN_PORT=8080", "-DKUBE_PROFILE=green", "-Dspring.profiles.active=green", "-Dserver.ssl.enabled=false", "-jar", "/app/libs/accounts-1.3.0.jar"]
+//        dockerClient.executable = "/usr/local/bin/docker"
+//        container.mainClass = "WebAppKt"
+//        java -Dserver.port=8080 -DKUBE_ADMIN_HOST=${KUBE_ADMIN_HOST} -DKUBE_ADMIN_PORT=${KUBE_ADMIN_PORT} -DKUBE_PROFILE=${ENVIRONMENT} -Dspring.profiles.active=${ENVIRONMENT} -Dserver.ssl.enabled=false -jar ${MICROSERVICE}-*.jar
+//        extraDirectories.paths = bootJar.destinationDir
+//        container.entrypoint = "java -Dserver.port=8080 -DKUBE_ADMIN_HOST=localhost -DKUBE_ADMIN_PORT=8080 -DKUBE_PROFILE=green -Dspring.profiles.active=green -Dserver.ssl.enabled=false -jar /app/libs/" + bootJar.archiveName
+//        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=localhost", "-DKUBE_ADMIN_PORT=8080", "-DKUBE_PROFILE=green", "-Dspring.profiles.active=green", "-Dserver.ssl.enabled=false", "-jar", "app/libs/accounts-*.jar"]
+//        container.entrypoint = ["sleep"]
+        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=\$3", "-DKUBE_ADMIN_PORT=\$4", "-DKUBE_PROFILE=\$1", "-Dspring.profiles.active=\$1", "-Dserver.ssl.enabled=false", "-jar", "/app/libs/" + bootJar.archiveName]
         container.user = "kubeadmin:kube"
     }
 
