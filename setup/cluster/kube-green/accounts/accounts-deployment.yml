@@ -16,7 +16,7 @@ spec:
     spec:
       serviceAccountName: kube-green-admin
       containers:
-        - image: navikco/kube:accounts
+        - image: localhost:5000/accounts:1.1.1_13
           imagePullPolicy: Always
           name: accounts
           volumeMounts:
