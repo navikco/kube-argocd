@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: ServiceAccount
-metadata:
-  name: navikco-sa
-  namespace: kube-tekton-cd
-secrets:
-  - name: navikco-secrets

@@ -41,14 +41,14 @@ argocd proj allow-cluster-resource kube-apps "*" "*"
 
 argocd app create kube-${ENVIRONMENT} --repo git@github.com:navikco/kube-argocd.git --revision "master" --path setup/cluster/kube-${ENVIRONMENT}/ --project kube-apps --dest-server "https://kubernetes.default.svc" --dest-namespace kube-${ENVIRONMENT}  --sync-policy automated --directory-recurse --self-heal --auto-prune
 
-argocd proj create kube-tektoncd --description "Kube-Ingress-TektonCD Ecosystem" --dest "https://kubernetes.default.svc","*" --src "*" --orphaned-resources
-argocd proj allow-cluster-resource kube-tektoncd "*" "*"
+#argocd proj create kube-tektoncd --description "Kube-Ingress-TektonCD Ecosystem" --dest "https://kubernetes.default.svc","*" --src "*" --orphaned-resources
+#argocd proj allow-cluster-resource kube-tektoncd "*" "*"
+#
+#argocd app create kube-tektoncd-${ENVIRONMENT} --repo git@github.com:navikco/kube-argocd.git --revision "master" --path setup/cluster/tektoncd/ --project kube-tektoncd --dest-server "https://kubernetes.default.svc" --dest-namespace kube-${ENVIRONMENT}  --sync-policy automated --directory-recurse --self-heal --auto-prune
 
-argocd app create kube-tektoncd-${ENVIRONMENT} --repo git@github.com:navikco/kube-argocd.git --revision "master" --path setup/cluster/tektoncd/ --project kube-tektoncd --dest-server "https://kubernetes.default.svc" --dest-namespace kube-${ENVIRONMENT}  --sync-policy automated --directory-recurse --self-heal --auto-prune
-
-sleep 30
-
-kubectl port-forward service/tekton-dashboard 5005:9097 --namespace=kube-tekton-cd &
 sleep 10
+
+#kubectl port-forward service/tekton-dashboard 5005:9097 --namespace=kube-tekton-cd &
+#sleep 10
 
 exit 0
