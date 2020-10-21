@@ -5,8 +5,8 @@ spring:
     active: local
 
 logging:
-  file: /app/libs/accounts.log
-  config: /app/libs/logback-spring.xml
+  file: ../accounts.log
+  config: ../logback-spring.xml
 
 ---
 

@@ -28,7 +28,7 @@ public class AccountsController {
     public ResponseEntity<String> list() throws Exception {
 
         List<Account> accounts = Arrays.asList(
-                new Account("100", "Marvel, Inc", "ACTIVE", "Commercial"),
+                new Account("100", "Pixar Studios, Inc", "ACTIVE", "Commercial"),
                 new Account("200", "Albert Einstein", "INACTIVE", "Personnel"),
                 new Account("300", "Disney, Inc.", "ACTIVE", "Commercial"),
                 new Account("400", "US Dept of Labor", "ACTIVE", "Government"),

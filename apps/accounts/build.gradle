@@ -75,34 +75,34 @@ allprojects {
     apply plugin: 'maven'
     apply plugin: "org.springframework.boot"
 
-    apply plugin: com.google.cloud.tools.jib.gradle.JibPlugin
+//    apply plugin: com.google.cloud.tools.jib.gradle.JibPlugin
     apply plugin: io.spring.gradle.dependencymanagement.DependencyManagementPlugin
     apply plugin: org.asciidoctor.gradle.AsciidoctorPlugin
     apply plugin: com.gorylenko.GitPropertiesPlugin
     apply plugin: com.palantir.gradle.gitversion.GitVersionPlugin
 
-    tasks.jib.dependsOn tasks.build
-    jib {
-
-        from.image = "registry://fabric8/java-alpine-openjdk8-jre"
-
-        extraDirectories {
-            paths {
-                path {
-                    from = file('/workspace/source/apps/accounts/build/libs/')
-                    into = '/app/libs/'
-                }
-                path {
-                    from = file('/workspace/source/apps/accounts/build/resources/main/logback/')
-                    into = '/app/libs/'
-                }
-            }
-        }
-
-//        container.entrypoint = ["sleep"]
-        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=\$3", "-DKUBE_ADMIN_PORT=\$4", "-DKUBE_PROFILE=\$1", "-Dspring.profiles.active=\$1", "-Dserver.ssl.enabled=false", "-jar", "/app/libs/" + bootJar.archiveName]
-        container.user = "kubeadmin:kube"
-    }
+//    tasks.jib.dependsOn tasks.build
+//    jib {
+//
+//        from.image = "registry://fabric8/java-alpine-openjdk8-jre"
+//
+//        extraDirectories {
+//            paths {
+//                path {
+//                    from = file('/workspace/source/apps/accounts/build/libs/')
+//                    into = '/app/libs/'
+//                }
+//                path {
+//                    from = file('/workspace/source/apps/accounts/build/resources/main/logback/')
+//                    into = '/app/libs/'
+//                }
+//            }
+//        }
+//
+////        container.entrypoint = ["sleep"]
+//        container.entrypoint = ["java", "-Dserver.port=8080", "-DKUBE_ADMIN_HOST=\$3", "-DKUBE_ADMIN_PORT=\$4", "-DKUBE_PROFILE=\$1", "-Dspring.profiles.active=\$1", "-Dserver.ssl.enabled=false", "-jar", "/app/libs/" + bootJar.archiveName]
+//        container.user = "kubeadmin:kube"
+//    }
 
     String kubeBuildNumber = 12
     String buildTime = new Date().format("yyyy-MM-dd HH:mm:ss")

@@ -48,7 +48,7 @@ chmod 700 ${KUBE_HOME}/build/*.jar
 cd ${KUBE_HOME}/build/
 
 echo "BUILDING :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker build --build-arg kubeMicroservice=${MICROSERVICE} -t localhost:5000/${MICROSERVICE}:1.1.1_12 .
+docker build --build-arg kubeMicroservice=${MICROSERVICE} -t localhost:5000/${MICROSERVICE}:1.1.1_13 .
 echo "BUILT :::>>> KUBE Docker Image ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 
 docker ps
@@ -56,8 +56,8 @@ docker ps
 docker images
 
 echo "PUSHING :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
-docker tag localhost:5000/${MICROSERVICE}:1.1.1_12 localhost:5000/${MICROSERVICE}:latest
-docker push localhost:5000/${MICROSERVICE}:1.1.1_12
+docker tag localhost:5000/${MICROSERVICE}:1.1.1_13 localhost:5000/${MICROSERVICE}:latest
+docker push localhost:5000/${MICROSERVICE}:1.1.1_13
 docker push localhost:5000/${MICROSERVICE}:latest
 echo "PUSHED :::>>> KUBE Docker Image to Docker Registry ::: [[[ " + ${MICROSERVICE} + " ]]]..."
 

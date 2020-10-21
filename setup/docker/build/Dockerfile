@@ -19,13 +19,13 @@
 # Access:
 #      # Access your Microservice running as DOCKER Container at
 #           https://localhost:8080/kube/customers/info/index.html
-
-
-FROM gradle:jdk8 AS builder
-ARG kubeMicroservice
-WORKDIR /workspace
-ADD ./ .
-RUN cd apps/${kubeMicroservice}/ && gradle wrapper && ./gradlew clean build && ls -ltr build/libs/
+#
+#
+#FROM gradle:jdk8 AS builder
+#ARG kubeMicroservice
+#WORKDIR /workspace
+#ADD ./ .
+#RUN cd apps/${kubeMicroservice}/ && gradle wrapper && ./gradlew clean build && ls -ltr build/libs/
 
 
 # Pull base image
@@ -43,7 +43,7 @@ USER root
 VOLUME ["/opt/mw/mount"]
 RUN mkdir -p /opt/mw/apps/kube/
 WORKDIR /opt/mw/apps/kube/
-ADD setup/docker/build/ .
+ADD ./ .
 
 RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 
@@ -51,16 +51,18 @@ RUN echo "###BUILD :::>>> ${kubeMicroservice}"
 # ------------------
 RUN apk add tzdata && ls /usr/share/zoneinfo && cp /usr/share/zoneinfo/America/Chicago /etc/localtime && echo "America/Chicago" >  /etc/timezone && date && apk del tzdata
 
-COPY --from=builder /workspace/apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar .
+#COPY --from=builder /workspace/apps/${kubeMicroservice}/build/libs/${kubeMicroservice}*.jar .
 
-RUN ls -lRt
+#RUN ls -lRt
 
-WORKDIR bin/
+#WORKDIR bin/
 
-RUN ./setupKUBE.sh ${kubeMicroservice}
+RUN ./bin/setupKUBE.sh
 
 # KUBE Docker Container Run as kubeadmin
 USER kubeadmin
 
+WORKDIR /opt/mw/apps/kube/bin/
+
 #Start KUBE Microservice with Elastic Search
-ENTRYPOINT ["./startKUBE.sh"]
+ENTRYPOINT ["/opt/mw/apps/kube/bin/startKUBE.sh"]

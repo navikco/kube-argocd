@@ -21,10 +21,10 @@
 #           https://localhost:8080/kube/customers/info/index.html
 
 
-FROM gradle:jdk8 AS builder
-WORKDIR /workspace
-ADD ./ .
-RUN cd apps/admin/ && gradle clean build && ls -ltr build/libs/
+#FROM gradle:jdk8 AS builder
+#WORKDIR /workspace
+#ADD ./ .
+#RUN cd apps/admin/ && gradle clean build && ls -ltr build/libs/
 
 
 # Pull base image
