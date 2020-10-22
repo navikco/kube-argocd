@@ -70,7 +70,7 @@ spec:
     metadata:
       labels:
         app: accounts
-  replicas: 1
+  replicas: 3
   strategy:
     type: RollingUpdate
     rollingUpdate:
